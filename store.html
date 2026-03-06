@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPPIMUS Digital Store — Tax Templates, Courses & Tools</title>
+<meta name="description" content="Professional tax templates, spreadsheets, courses, and business kits from licensed tax experts. Starting at $7. Instant digital download.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- ═══ SECURITY HEADERS ═══ -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.web3forms.com https://calendly.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: https:;
+    connect-src 'self' https://api.web3forms.com;
+    frame-src https://calendly.com;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self' https://api.web3forms.com;
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <style>
+:root {
+  --void: #05050a; --deep: #09090f; --card: #111120;
+  --border: rgba(255,255,255,0.07); --border-gold: rgba(196,160,92,0.28);
+  --gold: #c4a05c; --gold2: #e8c97a; --gold-dim: rgba(196,160,92,0.12);
+  --white: #f8f6f1; --muted: rgba(248,246,241,0.48); --faint: rgba(248,246,241,0.2);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;}
+body{font-family:"Outfit",sans-serif;background:var(--void);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body::after{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;}
+a{color:inherit;text-decoration:none;}
+.eyebrow{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(5,5,10,0.95);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000;backdrop-filter:blur(12px);}
+.topbar-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logomark{width:30px;height:30px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.topbar-wordmark{font-size:1rem;font-weight:700;letter-spacing:3px;color:var(--white);}
+.topbar-sub{font-size:0.58rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+.topbar-nav{display:flex;align-items:center;gap:4px;}
+.topbar-navlink{padding:7px 14px;border-radius:8px;font-size:0.78rem;font-weight:500;color:var(--muted);text-decoration:none;transition:all 0.2s;}
+.topbar-navlink:hover{color:var(--white);background:rgba(255,255,255,0.06);}
+.topbar-navlink.active{color:var(--gold);background:var(--gold-dim);}
+.topbar-btn{padding:9px 20px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:100px;font-family:"Outfit",sans-serif;font-size:0.78rem;font-weight:700;color:var(--void);cursor:pointer;letter-spacing:0.3px;text-decoration:none;display:inline-block;}
+
+/* STORE HERO */
+.store-hero{padding:80px 40px 60px;text-align:center;background:var(--void);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.store-hero::before{content:"";position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(196,160,92,0.08) 0%,transparent 70%);pointer-events:none;}
+.store-hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(2.4rem,6vw,4.5rem);font-weight:600;line-height:1.05;margin:16px 0 18px;color:var(--white);}
+.store-hero h1 em{font-style:italic;color:var(--gold2);}
+.store-hero p{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto 32px;line-height:1.7;font-weight:300;}
+.store-hero-stats{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-family:"Cormorant Garamond",serif;font-size:2rem;font-weight:700;color:var(--gold2);line-height:1;}
+.hero-stat-label{font-size:0.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
+.hero-stat-div{width:1px;height:36px;background:var(--border);}
+
+/* VERTICAL SCROLL */
+.vscroll-showcase{padding:0 40px 80px;background:var(--void);}
+.vscroll-columns{display:flex;gap:14px;height:480px;overflow:hidden;position:relative;max-width:900px;margin:0 auto;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 90%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 90%,transparent 100%);}
+.vscroll-track{display:flex;flex-direction:column;gap:14px;flex:1;}
+.vscroll-track-up{animation:vScrollUp 22s linear infinite;}
+.vscroll-track-down{animation:vScrollDown 26s linear infinite;}
+.vscroll-track-up:hover,.vscroll-track-down:hover{animation-play-state:paused;}
+@keyframes vScrollUp{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+@keyframes vScrollDown{0%{transform:translateY(-50%)}100%{transform:translateY(0)}}
+.vscroll-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color 0.3s,box-shadow 0.3s;cursor:pointer;flex-shrink:0;}
+.vscroll-card:hover{border-color:var(--border-gold);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+.vscroll-card-cover{height:110px;position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#111128,#1a1a35);overflow:hidden;}
+.vscroll-card-cover-pattern{position:absolute;inset:0;opacity:0.06;background-image:repeating-linear-gradient(45deg,var(--gold) 0,var(--gold) 1px,transparent 0,transparent 50%);background-size:12px 12px;}
+.vscroll-card-emoji{font-size:2.4rem;position:relative;z-index:1;transition:transform 0.3s;}
+.vscroll-card:hover .vscroll-card-emoji{transform:scale(1.15) rotate(-4deg);}
+.vscroll-card-tag{position:absolute;top:10px;left:10px;z-index:2;background:rgba(5,5,10,0.8);border:1px solid var(--border-gold);border-radius:100px;padding:2px 8px;font-size:0.55rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+.vscroll-card-body{padding:14px 16px;}
+.vscroll-card-title{font-family:"Cormorant Garamond",serif;font-size:0.92rem;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:8px;}
+.vscroll-card-footer{display:flex;align-items:center;justify-content:space-between;}
+.vscroll-card-price{font-family:"Cormorant Garamond",serif;font-size:1.15rem;font-weight:700;color:var(--gold2);}
+.vscroll-card-old{font-size:0.68rem;color:var(--faint);text-decoration:line-through;margin-right:4px;}
+.vscroll-card-badge{font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:100px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:#4ade80;}
+
+/* STORE GRID */
+.store-section{padding:80px 40px;background:var(--deep);border-top:1px solid var(--border);}
+.store-inner{max-width:1200px;margin:0 auto;}
+.store-tabs{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:28px 0 48px;}
+.store-tab{padding:9px 20px;border-radius:100px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.22s;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:"Outfit",sans-serif;}
+.store-tab:hover{border-color:var(--border-gold);color:var(--gold);background:var(--gold-dim);}
+.store-tab.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--void);border-color:transparent;}
+.store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:52px;}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(0.34,1.1,0.64,1);position:relative;}
+.product-card:hover{transform:translateY(-8px);border-color:var(--border-gold);box-shadow:0 28px 70px rgba(0,0,0,0.45);}
+.product-card.featured{border-color:var(--border-gold);}
+.product-ribbon{position:absolute;top:16px;right:-1px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--void);font-size:0.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:4px 0 0 4px;}
+.product-cover{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.product-cover-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--deep) 0%,#1a1a35 100%);}
+.product-cover-pattern{position:absolute;inset:0;opacity:0.08;background-image:repeating-linear-gradient(45deg,var(--gold) 0,var(--gold) 1px,transparent 0,transparent 50%);background-size:16px 16px;}
+.product-cover-icon{position:relative;z-index:1;font-size:3.5rem;transition:transform 0.3s;}
+.product-card:hover .product-cover-icon{transform:scale(1.12) rotate(-3deg);}
+.product-cover-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(196,160,92,0.12) 0%,transparent 70%);}
+.product-type-tag{position:absolute;bottom:12px;left:14px;z-index:2;background:rgba(5,5,10,0.75);backdrop-filter:blur(6px);border:1px solid var(--border-gold);border-radius:100px;padding:3px 10px;font-size:0.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+.product-body{padding:24px;flex:1;display:flex;flex-direction:column;}
+.product-category{font-size:0.63rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;}
+.product-name{font-family:"Cormorant Garamond",serif;font-size:1.22rem;font-weight:600;color:var(--white);line-height:1.25;margin-bottom:10px;}
+.product-desc{font-size:0.81rem;color:var(--muted);line-height:1.68;font-weight:300;flex:1;margin-bottom:18px;}
+.product-includes{display:flex;flex-direction:column;gap:6px;margin-bottom:20px;}
+.product-include{display:flex;align-items:center;gap:7px;font-size:0.77rem;color:rgba(248,246,241,0.72);}
+.product-include::before{content:"✦";color:var(--gold);font-size:0.5rem;flex-shrink:0;}
+.product-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;background:rgba(255,255,255,0.02);border-top:1px solid var(--border);}
+.product-price-old{font-size:0.72rem;color:var(--faint);text-decoration:line-through;}
+.product-price{font-family:"Cormorant Garamond",serif;font-size:1.8rem;font-weight:700;color:var(--gold2);line-height:1;}
+.product-price-note{font-size:0.63rem;color:var(--muted);margin-top:2px;}
+.product-btn{padding:11px 20px;border-radius:100px;font-family:"Outfit",sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.25s;text-decoration:none;border:none;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
+.product-btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--void);box-shadow:0 4px 16px rgba(196,160,92,0.25);}
+.product-btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,160,92,0.45);}
+.affiliate-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.25);color:#93c5fd;font-size:0.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-left:8px;}
+
+/* GUMROAD CTA */
+.store-gumroad-cta{background:linear-gradient(135deg,rgba(196,160,92,0.1) 0%,rgba(196,160,92,0.03) 100%);border:1px solid var(--border-gold);border-radius:20px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.store-gumroad-cta::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);}
+.gumroad-cta-title{font-family:"Cormorant Garamond",serif;font-size:1.8rem;font-weight:600;color:var(--white);margin-bottom:8px;}
+.gumroad-cta-title em{font-style:italic;color:var(--gold2);}
+
+/* FOOTER */
+footer{background:var(--deep);border-top:1px solid var(--border);padding:48px 40px 32px;text-align:center;}
+.footer-copy{font-size:0.75rem;color:var(--faint);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.store-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){
+  .topbar{padding:12px 16px;}
+  .store-hero{padding:60px 20px 48px;}
+  .vscroll-showcase{padding:0 20px 60px;}
+  .vscroll-columns{height:340px;}
+  .store-section{padding:60px 16px;}
+  .store-grid{grid-template-columns:1fr;}
+  .store-tabs{gap:6px;}
+  .store-tab{padding:7px 14px;font-size:0.72rem;}
+  .store-gumroad-cta{padding:24px 20px;flex-direction:column;}
+  .topbar-navlink{padding:6px 8px;font-size:0.7rem;}
+  footer{padding:32px 20px;}
+}
+.page-hero>*:not(canvas),.store-hero>*:not(canvas){position:relative;z-index:2;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a class="topbar-logo" href="index.html">
+    <div class="topbar-logomark">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+        <rect x="1" y="11" width="3" height="7" fill="#05050a" rx="0.5"/>
+        <rect x="6" y="8" width="3" height="10" fill="#05050a" rx="0.5"/>
+        <rect x="11" y="5" width="3" height="13" fill="#05050a" rx="0.5"/>
+        <polyline points="0,9 8,15 20,2" fill="none" stroke="#05050a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="topbar-wordmark">OPPIMUS</div>
+      <div class="topbar-sub">Tax planning &amp; precision filing</div>
+    </div>
+  </a>
+  <nav class="topbar-nav">
+    <a href="index.html" class="topbar-navlink ">Home</a>
+    <a href="store.html" class="topbar-navlink active">Store</a>
+    <a href="blog.html" class="topbar-navlink ">Blog</a>
+    <a href="about.html" class="topbar-navlink ">About</a>
+    <a href="contact.html" class="topbar-navlink ">Contact</a>
+  </nav>
+  <a href="index.html#intake" class="topbar-btn">Start Free Intake</a>
+</header>
+
+<!-- STORE HERO -->
+<section class="store-hero" style="position:relative;overflow:hidden;">
+  <canvas id="neural-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.45;"></canvas>
+  <div class="eyebrow">OPPIMUS Digital Store</div>
+  <h1>Tools that pay for<br><em>themselves.</em></h1>
+  <p>Professional-grade tax tools, financial guides, AI courses, and business resources — created by licensed experts, priced for everyone. Instant digital download.</p>
+  <div class="store-hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">9+</div>
+      <div class="hero-stat-label">Products</div>
+    </div>
+    <div class="hero-stat-div"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">$7</div>
+      <div class="hero-stat-label">Starting From</div>
+    </div>
+    <div class="hero-stat-div"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">⚡</div>
+      <div class="hero-stat-label">Instant Download</div>
+    </div>
+    <div class="hero-stat-div"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">🔒</div>
+      <div class="hero-stat-label">Secure Checkout</div>
+    </div>
+  </div>
+</section>
+
+<!-- VERTICAL SCROLL PREVIEW -->
+<section class="vscroll-showcase">
+  <div class="vscroll-columns">
+    <div class="vscroll-track vscroll-track-up">
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📋</div><div class="vscroll-card-tag">Template</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">2025 Max Refund Checklist</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$29</span><span class="vscroll-card-price">$9</span></div><span class="vscroll-card-badge">PDF</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🏢</div><div class="vscroll-card-tag">Business Kit</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">LLC Starter Kit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$79</span><span class="vscroll-card-price">$27</span></div><span class="vscroll-card-badge">Hot 🔥</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🤖</div><div class="vscroll-card-tag">AI Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">AI for Small Business</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$97</span><span class="vscroll-card-price">$37</span></div><span class="vscroll-card-badge">New</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📚</div><div class="vscroll-card-tag">eBook</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">ITIN Filing Bible</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$29</span><span class="vscroll-card-price">$12</span></div><span class="vscroll-card-badge">En/Es</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📈</div><div class="vscroll-card-tag">Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Build Business Credit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$197</span><span class="vscroll-card-price">$67</span></div><span class="vscroll-card-badge">Popular</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">💰</div><div class="vscroll-card-tag">Bundle</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Financial Freedom Kit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$997</span><span class="vscroll-card-price">$97</span></div><span class="vscroll-card-badge">90% Off</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📋</div><div class="vscroll-card-tag">Template</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Tax Document Organizer</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$19</span><span class="vscroll-card-price">$7</span></div><span class="vscroll-card-badge">PDF</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🎓</div><div class="vscroll-card-tag">Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Tax Basics Masterclass</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$147</span><span class="vscroll-card-price">$47</span></div><span class="vscroll-card-badge">Video</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📋</div><div class="vscroll-card-tag">Template</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">2025 Max Refund Checklist</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$29</span><span class="vscroll-card-price">$9</span></div><span class="vscroll-card-badge">PDF</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🏢</div><div class="vscroll-card-tag">Business Kit</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">LLC Starter Kit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$79</span><span class="vscroll-card-price">$27</span></div><span class="vscroll-card-badge">Hot 🔥</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🤖</div><div class="vscroll-card-tag">AI Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">AI for Small Business</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$97</span><span class="vscroll-card-price">$37</span></div><span class="vscroll-card-badge">New</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📚</div><div class="vscroll-card-tag">eBook</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">ITIN Filing Bible</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$29</span><span class="vscroll-card-price">$12</span></div><span class="vscroll-card-badge">En/Es</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📈</div><div class="vscroll-card-tag">Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Build Business Credit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$197</span><span class="vscroll-card-price">$67</span></div><span class="vscroll-card-badge">Popular</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">💰</div><div class="vscroll-card-tag">Bundle</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Financial Freedom Kit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$997</span><span class="vscroll-card-price">$97</span></div><span class="vscroll-card-badge">90% Off</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📋</div><div class="vscroll-card-tag">Template</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Tax Document Organizer</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$19</span><span class="vscroll-card-price">$7</span></div><span class="vscroll-card-badge">PDF</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🎓</div><div class="vscroll-card-tag">Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Tax Basics Masterclass</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$147</span><span class="vscroll-card-price">$47</span></div><span class="vscroll-card-badge">Video</span></div></div></div>
+    </div>
+    <div class="vscroll-track vscroll-track-down">
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📊</div><div class="vscroll-card-tag">Spreadsheet</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Self-Employed Tax Tracker</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$47</span><span class="vscroll-card-price">$17</span></div><span class="vscroll-card-badge">Sheet</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🏦</div><div class="vscroll-card-tag">Spreadsheet</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Business Financial Dashboard</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$67</span><span class="vscroll-card-price">$24</span></div><span class="vscroll-card-badge">Sheet</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📈</div><div class="vscroll-card-tag">Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Build Business Credit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$197</span><span class="vscroll-card-price">$67</span></div><span class="vscroll-card-badge">Course</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🤖</div><div class="vscroll-card-tag">AI Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">AI for Small Business</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$97</span><span class="vscroll-card-price">$37</span></div><span class="vscroll-card-badge">New</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🏢</div><div class="vscroll-card-tag">Business Kit</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">LLC Starter Kit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$79</span><span class="vscroll-card-price">$27</span></div><span class="vscroll-card-badge">Kit</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📚</div><div class="vscroll-card-tag">eBook</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">ITIN Filing Bible</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$29</span><span class="vscroll-card-price">$12</span></div><span class="vscroll-card-badge">eBook</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🎓</div><div class="vscroll-card-tag">Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Tax Basics Masterclass</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$147</span><span class="vscroll-card-price">$47</span></div><span class="vscroll-card-badge">Video</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📋</div><div class="vscroll-card-tag">Template</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">2025 Max Refund Checklist</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$29</span><span class="vscroll-card-price">$9</span></div><span class="vscroll-card-badge">PDF</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📊</div><div class="vscroll-card-tag">Spreadsheet</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Self-Employed Tax Tracker</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$47</span><span class="vscroll-card-price">$17</span></div><span class="vscroll-card-badge">Sheet</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🏦</div><div class="vscroll-card-tag">Spreadsheet</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Business Financial Dashboard</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$67</span><span class="vscroll-card-price">$24</span></div><span class="vscroll-card-badge">Sheet</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📈</div><div class="vscroll-card-tag">Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Build Business Credit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$197</span><span class="vscroll-card-price">$67</span></div><span class="vscroll-card-badge">Course</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🤖</div><div class="vscroll-card-tag">AI Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">AI for Small Business</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$97</span><span class="vscroll-card-price">$37</span></div><span class="vscroll-card-badge">New</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🏢</div><div class="vscroll-card-tag">Business Kit</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">LLC Starter Kit</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$79</span><span class="vscroll-card-price">$27</span></div><span class="vscroll-card-badge">Kit</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📚</div><div class="vscroll-card-tag">eBook</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">ITIN Filing Bible</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$29</span><span class="vscroll-card-price">$12</span></div><span class="vscroll-card-badge">eBook</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">🎓</div><div class="vscroll-card-tag">Course</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">Tax Basics Masterclass</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$147</span><span class="vscroll-card-price">$47</span></div><span class="vscroll-card-badge">Video</span></div></div></div>
+      <div class="vscroll-card"><div class="vscroll-card-cover"><div class="vscroll-card-cover-pattern"></div><div class="vscroll-card-emoji">📋</div><div class="vscroll-card-tag">Template</div></div><div class="vscroll-card-body"><div class="vscroll-card-title">2025 Max Refund Checklist</div><div class="vscroll-card-footer"><div><span class="vscroll-card-old">$29</span><span class="vscroll-card-price">$9</span></div><span class="vscroll-card-badge">PDF</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT GRID -->
+<section class="store-section">
+  <div class="store-inner">
+    <div style="text-align:center;margin-bottom:12px;">
+      <div class="eyebrow">Browse All Products</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:var(--white);margin-top:12px;">Everything you need,<br><em style="color:var(--gold2);">in one place.</em></h2>
+    </div>
+    <div class="store-tabs">
+      <button class="store-tab active" onclick="filterProducts('all',this)">All Products</button>
+      <button class="store-tab" onclick="filterProducts('templates',this)">📄 Templates</button>
+      <button class="store-tab" onclick="filterProducts('spreadsheets',this)">📊 Spreadsheets</button>
+      <button class="store-tab" onclick="filterProducts('courses',this)">🎓 Courses</button>
+      <button class="store-tab" onclick="filterProducts('business',this)">🏢 Business Kits</button>
+      <button class="store-tab" onclick="filterProducts('ebooks',this)">📚 eBooks</button>
+      <button class="store-tab" onclick="filterProducts('ai',this)">🤖 AI Tools</button>
+    </div>
+    <div class="store-grid" id="store-grid">
+
+      <div class="product-card featured" data-category="templates">
+        <div class="product-ribbon">⭐ Best Seller</div>
+        <div class="product-cover"><div class="product-cover-bg"></div><div class="product-cover-pattern"></div><div class="product-cover-glow"></div><div class="product-cover-icon">📋</div><div class="product-type-tag">PDF Template</div></div>
+        <div class="product-body">
+          <div class="product-category">Tax Templates</div>
+          <h3 class="product-name">2025 Maximum Refund Checklist</h3>
+          <p class="product-desc">The exact checklist our licensed experts use to find every hidden credit and deduction. Stop leaving money on the table.</p>
+          <div class="product-includes">
+            <div class="product-include">47 deductions most filers miss completely</div>
+            <div class="product-include">Credits by filing status</div>
+            <div class="product-include">Self-employed deduction master list</div>
+            <div class="product-include">Printable + fillable PDF</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div><div class="product-price-old">$29</div><div class="product-price">$9</div><div class="product-price-note">Instant download</div></div>
+          <a href="https://gumroad.com/oppimus" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold">Get It Now →</a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="spreadsheets">
+        <div class="product-cover"><div class="product-cover-bg"></div><div class="product-cover-pattern"></div><div class="product-cover-glow"></div><div class="product-cover-icon">📊</div><div class="product-type-tag">Google Sheets</div></div>
+        <div class="product-body">
+          <div class="product-category">Spreadsheets</div>
+          <h3 class="product-name">Self-Employed Tax Tracker 2025</h3>
+          <p class="product-desc">Track income, expenses, mileage, and quarterly taxes automatically. Built for freelancers, gig workers, and small business owners.</p>
+          <div class="product-includes">
+            <div class="product-include">Auto-calculates quarterly estimated taxes</div>
+            <div class="product-include">Mileage log with IRS rate built in</div>
+            <div class="product-include">Profit/loss dashboard included</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div><div class="product-price-old">$47</div><div class="product-price">$17</div><div class="product-price-note">Instant access</div></div>
+          <a href="https://gumroad.com/oppimus" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold">Get It Now →</a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="business">
+        <div class="product-ribbon">🔥 Hot</div>
+        <div class="product-cover"><div class="product-cover-bg"></div><div class="product-cover-pattern"></div><div class="product-cover-glow"></div><div class="product-cover-icon">🏢</div><div class="product-type-tag">Starter Kit</div></div>
+        <div class="product-body">
+          <div class="product-category">Business Kits</div>
+          <h3 class="product-name">LLC Starter Kit — Form, Operate &amp; Save</h3>
+          <p class="product-desc">Everything you need to form your LLC, set it up for tax savings, and run it like a pro.</p>
+          <div class="product-includes">
+            <div class="product-include">Step-by-step LLC formation guide (all 50 states)</div>
+            <div class="product-include">LLC vs S-Corp tax comparison calculator</div>
+            <div class="product-include">Operating agreement template</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div><div class="product-price-old">$79</div><div class="product-price">$27</div><div class="product-price-note">Instant download</div></div>
+          <a href="https://gumroad.com/oppimus" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold">Get It Now →</a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="courses">
+        <div class="product-ribbon">🎓 New</div>
+        <div class="product-cover"><div class="product-cover-bg"></div><div class="product-cover-pattern"></div><div class="product-cover-glow"></div><div class="product-cover-icon">🎬</div><div class="product-type-tag">Video Course</div></div>
+        <div class="product-body">
+          <div class="product-category">Courses</div>
+          <h3 class="product-name">Tax Basics Masterclass — File Like a Pro</h3>
+          <p class="product-desc">5 short video modules covering everything a working adult needs to know about taxes.</p>
+          <div class="product-includes">
+            <div class="product-include">5 expert video modules (under 2hrs total)</div>
+            <div class="product-include">Downloadable workbook included</div>
+            <div class="product-include">Lifetime access + certificate</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div><div class="product-price-old">$147</div><div class="product-price">$47</div><div class="product-price-note">Lifetime access</div></div>
+          <a href="https://gumroad.com/oppimus" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold">Enroll Now →</a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="ebooks">
+        <div class="product-cover"><div class="product-cover-bg"></div><div class="product-cover-pattern"></div><div class="product-cover-glow"></div><div class="product-cover-icon">📚</div><div class="product-type-tag">eBook</div></div>
+        <div class="product-body">
+          <div class="product-category">eBooks</div>
+          <h3 class="product-name">The ITIN Filing Bible — Non-Citizens Complete Guide</h3>
+          <p class="product-desc">The definitive guide for immigrants and non-citizens to file U.S. taxes legally and maximize refunds.</p>
+          <div class="product-includes">
+            <div class="product-include">How to apply for and use your ITIN</div>
+            <div class="product-include">Credits available to non-citizens</div>
+            <div class="product-include">Available in English &amp; Spanish</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div><div class="product-price-old">$29</div><div class="product-price">$12</div><div class="product-price-note">Instant download</div></div>
+          <a href="https://gumroad.com/oppimus" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold">Get It Now →</a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="ai">
+        <div class="product-ribbon">🤖 AI-Powered</div>
+        <div class="product-cover"><div class="product-cover-bg"></div><div class="product-cover-pattern"></div><div class="product-cover-glow"></div><div class="product-cover-icon">🤖</div><div class="product-type-tag">AI Course</div></div>
+        <div class="product-body">
+          <div class="product-category">AI Tools</div>
+          <h3 class="product-name">AI for Small Business — Save 10hrs a Week</h3>
+          <p class="product-desc">How to use AI tools to automate bookkeeping, write contracts, handle emails, and run your business smarter.</p>
+          <div class="product-includes">
+            <div class="product-include">20+ real AI prompts for business owners</div>
+            <div class="product-include">Automate invoicing, follow-ups &amp; reports</div>
+            <div class="product-include">Bonus: AI tax prep checklist</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div><div class="product-price-old">$97</div><div class="product-price">$37</div><div class="product-price-note">Lifetime access</div></div>
+          <a href="https://gumroad.com/oppimus" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold">Get It Now →</a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="ebooks">
+        <div class="product-cover"><div class="product-cover-bg"></div><div class="product-cover-pattern"></div><div class="product-cover-glow"></div><div class="product-cover-icon">💰</div><div class="product-type-tag">Bundle</div></div>
+        <div class="product-body">
+          <div class="product-category">Financial Freedom <span class="affiliate-badge">Partner</span></div>
+          <h3 class="product-name">Financial Freedom Kit — Complete Bundle</h3>
+          <p class="product-desc">Budget smarter, eliminate debt, build wealth. The complete money transformation system for individuals and business owners.</p>
+          <div class="product-includes">
+            <div class="product-include">Budgeting &amp; debt elimination playbook</div>
+            <div class="product-include">Credit repair action plan</div>
+            <div class="product-include">Retirement planning starter guide</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div><div class="product-price-old">$997</div><div class="product-price">$97</div><div class="product-price-note">Instant access</div></div>
+          <a href="https://moneymentorstore.systeme.io/4f3551f4-edc4b685-fbdfadb8-8cadaf0f" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold">Get Access →</a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="spreadsheets">
+        <div class="product-cover"><div class="product-cover-bg"></div><div class="product-cover-pattern"></div><div class="product-cover-glow"></div><div class="product-cover-icon">🏦</div><div class="product-type-tag">Spreadsheet</div></div>
+        <div class="product-body">
+          <div class="product-category">Spreadsheets</div>
+          <h3 class="product-name">Small Business Financial Dashboard 2025</h3>
+          <p class="product-desc">A done-for-you Google Sheets dashboard tracking revenue, expenses, payroll, and profit automatically.</p>
+          <div class="product-includes">
+            <div class="product-include">Revenue &amp; expense tracker by category</div>
+            <div class="product-include">Monthly P&amp;L auto-generated</div>
+            <div class="product-include">Tax savings estimator built in</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div><div class="product-price-old">$67</div><div class="product-price">$24</div><div class="product-price-note">Instant access</div></div>
+          <a href="https://gumroad.com/oppimus" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold">Get It Now →</a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="courses">
+        <div class="product-cover"><div class="product-cover-bg"></div><div class="product-cover-pattern"></div><div class="product-cover-glow"></div><div class="product-cover-icon">📈</div><div class="product-type-tag">Video Course</div></div>
+        <div class="product-body">
+          <div class="product-category">Courses</div>
+          <h3 class="product-name">Build Business Credit from Zero — 90 Day Plan</h3>
+          <p class="product-desc">Step-by-step video course showing exactly how to build a strong business credit profile in 90 days.</p>
+          <div class="product-includes">
+            <div class="product-include">8 video modules with action steps</div>
+            <div class="product-include">Business credit application templates</div>
+            <div class="product-include">Private community access</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div><div class="product-price-old">$197</div><div class="product-price">$67</div><div class="product-price-note">Lifetime access</div></div>
+          <a href="https://gumroad.com/oppimus" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold">Enroll Now →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="store-gumroad-cta">
+      <div>
+        <div class="eyebrow" style="margin-bottom:12px;">🛒 Sell Your Own Products</div>
+        <h3 class="gumroad-cta-title">Have something to sell?<br><em>Get on Gumroad free.</em></h3>
+        <p style="font-size:0.85rem;color:var(--muted);line-height:1.7;max-width:480px;margin-top:8px;">Zero upfront cost — Gumroad takes a small % only when you make a sale. Upload your PDF, spreadsheet, or course and start selling in 10 minutes.</p>
+        <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+          <a href="https://gumroad.com/signup" target="_blank" rel="noopener noreferrer" class="product-btn product-btn-gold" style="font-size:0.84rem;padding:13px 26px;">🚀 Create Free Gumroad Store →</a>
+          <a href="https://calendly.com/oppimus-oppimus/30min" target="_blank" rel="noopener noreferrer" class="product-btn" style="font-size:0.84rem;padding:13px 26px;background:transparent;border:1px solid var(--border-gold);color:var(--gold);">📅 Get Setup Help</a>
+        </div>
+      </div>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:700;color:var(--gold2);line-height:1;">$0</div>
+        <div style="font-size:0.72rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:4px;">to start selling</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:var(--deep);border-top:1px solid var(--border);padding:48px 40px 32px;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:20px;">
+      <a href="index.html" style="font-size:0.8rem;color:var(--muted);">Home</a> <a href="store.html" style="font-size:0.8rem;color:var(--gold);">Store</a> <a href="blog.html" style="font-size:0.8rem;color:var(--muted);">Blog</a> <a href="about.html" style="font-size:0.8rem;color:var(--muted);">About</a> <a href="contact.html" style="font-size:0.8rem;color:var(--muted);">Contact</a>
+    </div>
+    <p style="font-size:0.75rem;color:var(--faint);text-align:center;">© 2025 OPPIMUS Tax &amp; Financial Services LLC · All rights reserved · <a href="/cdn-cgi/l/email-protection#4827383821253d3b0827383821253d3b662b2725" style="color:var(--gold);"><span class="__cf_email__" data-cfemail="d8b7a8a8b1b5adab98b7a8a8b1b5adabf6bbb7b5">[email&#160;protected]</span></a> · (225) 952-4400</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+window.filterProducts = function(category, btn) {
+  document.querySelectorAll('.store-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card => {
+    const match = category === 'all' || card.dataset.category === category;
+    card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    if (match) { card.style.opacity='1'; card.style.transform=''; card.style.display='flex'; }
+    else { card.style.opacity='0'; card.style.transform='scale(0.95)'; setTimeout(()=>{ if(card.style.opacity==='0') card.style.display='none'; },250); }
+  });
+};
+</script>
+<script>
+(function(){
+  var canvas=document.getElementById('neural-canvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d'),W,H,nodes,animId;
+  var N=48,MAXD=155;
+  function resize(){var r=canvas.parentElement.getBoundingClientRect();W=canvas.width=r.width||window.innerWidth;H=canvas.height=r.height||560;}
+  function mk(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.55,vy:(Math.random()-0.5)*0.55,r:Math.random()*2.2+1,p:Math.random()*6.28,ps:0.02+Math.random()*0.02};}
+  function init(){resize();nodes=[];for(var i=0;i<N;i++)nodes.push(mk());}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<nodes.length;i++){var n=nodes[i];n.x+=n.vx;n.y+=n.vy;n.p+=n.ps;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;n.x=Math.max(0,Math.min(W,n.x));n.y=Math.max(0,Math.min(H,n.y));}
+    for(var i=0;i<nodes.length;i++){for(var j=i+1;j<nodes.length;j++){var a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<MAXD){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(196,160,92,'+(1-d/MAXD)*0.32+')';ctx.lineWidth=0.7;ctx.stroke();}}}
+    for(var i=0;i<nodes.length;i++){var n=nodes[i],pu=Math.sin(n.p)*0.5+0.5,rad=n.r+pu*1.2,al=0.45+pu*0.45,g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,rad*3.5);g.addColorStop(0,'rgba(232,201,122,'+al*0.7+')');g.addColorStop(1,'rgba(196,160,92,0)');ctx.beginPath();ctx.arc(n.x,n.y,rad*3.5,0,6.28);ctx.fillStyle=g;ctx.fill();ctx.beginPath();ctx.arc(n.x,n.y,rad,0,6.28);ctx.fillStyle='rgba(232,201,122,'+al+')';ctx.fill();}
+    animId=requestAnimationFrame(draw);
+  }
+  document.addEventListener('visibilitychange',function(){if(document.hidden)cancelAnimationFrame(animId);else draw();});
+  canvas.parentElement.addEventListener('mousemove',function(e){var r=canvas.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;for(var i=0;i<nodes.length;i++){var n=nodes[i],dx=mx-n.x,dy=my-n.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){n.vx+=dx/d*0.04;n.vy+=dy/d*0.04;var s=Math.sqrt(n.vx*n.vx+n.vy*n.vy);if(s>2.5){n.vx

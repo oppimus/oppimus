@@ -1,0 +1,85 @@
+# ═══════════════════════════════════════════════
+# OPPIMUS — Netlify Security & Performance Config
+# ═══════════════════════════════════════════════
+
+[build]
+  publish = "."
+
+# ── Global security headers (applied to every page)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent clickjacking
+    X-Frame-Options = "SAMEORIGIN"
+    
+    # Prevent MIME sniffing attacks
+    X-Content-Type-Options = "nosniff"
+    
+    # XSS Protection (legacy browsers)
+    X-XSS-Protection = "1; mode=block"
+    
+    # Control referrer info sent to other sites
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Disable browser features not needed on this site
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()"
+    
+    # Force HTTPS for 1 year (HSTS)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
+    # Content Security Policy — whitelist only trusted sources
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.web3forms.com https://calendly.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https:;
+      connect-src 'self' https://api.web3forms.com;
+      frame-src https://calendly.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://api.web3forms.com;
+    """
+
+# ── Cache static assets (performance)
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ── Clean URL redirects (oppimus.com/store instead of oppimus.com/store.html)
+[[redirects]]
+  from = "/store"
+  to = "/store.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+# ── 404 page fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404

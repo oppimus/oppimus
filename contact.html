@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact OPPIMUS — Get In Touch</title>
+<meta name="description" content="Contact OPPIMUS Tax & Financial Services. Call, email, book a free consultation, or send us a message. We respond within 24 hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- ═══ SECURITY HEADERS ═══ -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.web3forms.com https://calendly.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: https:;
+    connect-src 'self' https://api.web3forms.com;
+    frame-src https://calendly.com;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self' https://api.web3forms.com;
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <style>
+:root{--void:#05050a;--deep:#09090f;--card:#111120;--border:rgba(255,255,255,0.07);--border-gold:rgba(196,160,92,0.28);--gold:#c4a05c;--gold2:#e8c97a;--gold-dim:rgba(196,160,92,0.12);--white:#f8f6f1;--muted:rgba(248,246,241,0.48);--faint:rgba(248,246,241,0.2);--error:#ef4444;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;}
+body{font-family:"Outfit",sans-serif;background:var(--void);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body::after{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;}
+a{color:inherit;text-decoration:none;}
+.eyebrow{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(5,5,10,0.95);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000;backdrop-filter:blur(12px);}
+.topbar-logo{display:flex;align-items:center;gap:10px;}
+.topbar-logomark{width:30px;height:30px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.topbar-wordmark{font-size:1rem;font-weight:700;letter-spacing:3px;color:var(--white);}
+.topbar-sub{font-size:0.58rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+.topbar-nav{display:flex;align-items:center;gap:4px;}
+.topbar-navlink{padding:7px 14px;border-radius:8px;font-size:0.78rem;font-weight:500;color:var(--muted);transition:all 0.2s;}
+.topbar-navlink:hover{color:var(--white);background:rgba(255,255,255,0.06);}
+.topbar-navlink.active{color:var(--gold);background:var(--gold-dim);}
+.topbar-btn{padding:9px 20px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:100px;font-family:"Outfit",sans-serif;font-size:0.78rem;font-weight:700;color:var(--void);cursor:pointer;display:inline-block;}
+
+/* HERO */
+.page-hero{padding:80px 40px 60px;text-align:center;background:var(--void);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.page-hero::before{content:"";position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(196,160,92,0.08) 0%,transparent 70%);pointer-events:none;}
+.page-hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(2.4rem,6vw,4rem);font-weight:600;line-height:1.05;margin:16px 0 16px;color:var(--white);}
+.page-hero h1 em{font-style:italic;color:var(--gold2);}
+.page-hero > *{position:relative;z-index:2;}
+
+/* CONTACT GRID */
+.contact-section{padding:80px 40px;background:var(--deep);}
+.contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start;}
+
+/* Contact info cards */
+.contact-info{display:flex;flex-direction:column;gap:14px;}
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;display:flex;align-items:flex-start;gap:16px;transition:all 0.3s;}
+.contact-card:hover{border-color:var(--border-gold);transform:translateX(4px);}
+.contact-card-icon{width:44px;height:44px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--border-gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.contact-card-label{font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px;}
+.contact-card-value{font-size:0.92rem;font-weight:600;color:var(--white);margin-bottom:3px;}
+.contact-card-sub{font-size:0.76rem;color:var(--muted);line-height:1.5;}
+.contact-card a{color:var(--gold2);text-decoration:none;}
+.contact-card a:hover{text-decoration:underline;}
+
+/* Hours */
+.hours-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;margin-top:4px;}
+.hours-title{font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;}
+.hours-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.82rem;}
+.hours-row:last-child{border-bottom:none;}
+.hours-day{color:var(--muted);}
+.hours-time{color:var(--white);font-weight:500;}
+.hours-time.open{color:#4ade80;}
+.hours-time.closed{color:var(--faint);}
+
+/* Contact form */
+.contact-form-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;position:relative;overflow:hidden;}
+.contact-form-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);}
+.contact-form-title{font-family:"Cormorant Garamond",serif;font-size:1.6rem;font-weight:600;color:var(--white);margin-bottom:6px;}
+.contact-form-sub{font-size:0.82rem;color:var(--muted);margin-bottom:28px;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.form-group label{font-size:0.74rem;font-weight:600;color:var(--muted);letter-spacing:0.5px;}
+.form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px;font-family:"DM Sans",sans-serif;font-size:0.86rem;color:var(--white);outline:none;transition:border-color 0.2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--border-gold);}
+.form-group textarea{resize:vertical;min-height:110px;}
+.form-group select option{background:var(--card);color:var(--white);}
+.contact-submit{width:100%;padding:15px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:12px;font-family:"Outfit",sans-serif;font-size:0.92rem;font-weight:700;color:var(--void);cursor:pointer;transition:all 0.25s;margin-top:6px;}
+.contact-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,160,92,0.4);}
+.contact-success{display:none;text-align:center;padding:32px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:14px;margin-top:16px;}
+.contact-success-icon{font-size:2.5rem;margin-bottom:12px;}
+.contact-success h3{font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:var(--white);margin-bottom:8px;}
+.contact-success p{font-size:0.84rem;color:var(--muted);line-height:1.6;}
+
+/* Calendly embed */
+.calendly-section{padding:80px 40px;background:var(--void);border-top:1px solid var(--border);}
+.calendly-inner{max-width:900px;margin:0 auto;text-align:center;}
+.calendly-card{background:var(--card);border:1px solid var(--border-gold);border-radius:20px;padding:48px 40px;position:relative;overflow:hidden;margin-top:40px;}
+.calendly-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);}
+.calendly-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--void);padding:16px 36px;border-radius:100px;font-family:"Outfit",sans-serif;font-size:1rem;font-weight:700;text-decoration:none;transition:all 0.25s;margin-top:24px;}
+.calendly-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(196,160,92,0.4);}
+
+/* Map / location */
+.location-section{padding:80px 40px;background:var(--deep);border-top:1px solid var(--border);}
+.location-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.location-map{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;height:300px;display:flex;align-items:center;justify-content:center;position:relative;}
+.location-map-placeholder{text-align:center;}
+
+/* Footer */
+footer{background:var(--deep);border-top:1px solid var(--border);padding:48px 40px 32px;text-align:center;}
+
+/* Responsive */
+@media(max-width:1024px){.contact-inner{grid-template-columns:1fr;}.location-inner{grid-template-columns:1fr;}}
+@media(max-width:640px){
+  .topbar{padding:12px 16px;}
+  .page-hero{padding:60px 20px 48px;}
+  .contact-section{padding:60px 16px;}
+  .calendly-section{padding:60px 16px;}
+  .location-section{padding:60px 16px;}
+  .contact-form-card{padding:28px 20px;}
+  .form-row{grid-template-columns:1fr;}
+  .topbar-navlink{padding:6px 8px;font-size:0.7rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a class="topbar-logo" href="index.html">
+    <div class="topbar-logomark">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+        <rect x="1" y="11" width="3" height="7" fill="#05050a" rx="0.5"/>
+        <rect x="6" y="8" width="3" height="10" fill="#05050a" rx="0.5"/>
+        <rect x="11" y="5" width="3" height="13" fill="#05050a" rx="0.5"/>
+        <polyline points="0,9 8,15 20,2" fill="none" stroke="#05050a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="topbar-wordmark">OPPIMUS</div>
+      <div class="topbar-sub">Tax planning &amp; precision filing</div>
+    </div>
+  </a>
+  <nav class="topbar-nav">
+    <a href="index.html" class="topbar-navlink ">Home</a>
+    <a href="store.html" class="topbar-navlink ">Store</a>
+    <a href="blog.html" class="topbar-navlink ">Blog</a>
+    <a href="about.html" class="topbar-navlink ">About</a>
+    <a href="contact.html" class="topbar-navlink active">Contact</a>
+  </nav>
+  <a href="index.html#intake" class="topbar-btn">Start Free Intake</a>
+</header>
+
+<!-- HERO -->
+<section class="page-hero">
+  <canvas id="neural-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.45;"></canvas>
+  <div class="eyebrow">Get In Touch</div>
+  <h1>We're here to <em>help you win.</em></h1>
+  <p style="font-size:1rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.7;font-weight:300;">Questions about your taxes, a service, or just not sure where to start? Reach out — a licensed OPPIMUS expert responds within 24 hours.</p>
+</section>
+
+<!-- CONTACT GRID -->
+<section class="contact-section">
+  <div class="contact-inner">
+
+    <!-- Left: contact info -->
+    <div>
+      <div class="contact-info">
+
+        <div class="contact-card">
+          <div class="contact-card-icon">📞</div>
+          <div>
+            <div class="contact-card-label">Phone / WhatsApp</div>
+            <div class="contact-card-value"><a href="tel:+12259524400">(225) 952-4400</a></div>
+            <div class="contact-card-sub">Call or text anytime. WhatsApp available for international clients.</div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon">📧</div>
+          <div>
+            <div class="contact-card-label">Email</div>
+            <div class="contact-card-value"><a href="/cdn-cgi/l/email-protection#5a352a2a33372f291a352a2a33372f2974393537"><span class="__cf_email__" data-cfemail="1a756a6a73776f695a756a6a73776f6934797577">[email&#160;protected]</span></a></div>
+            <div class="contact-card-sub">We respond to all emails within 24 business hours.</div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon">📅</div>
+          <div>
+            <div class="contact-card-label">Free Consultation</div>
+            <div class="contact-card-value"><a href="https://calendly.com/oppimus-oppimus/30min" target="_blank" rel="noopener noreferrer">Book a 30-min call →</a></div>
+            <div class="contact-card-sub">Free, no-commitment call with a licensed tax expert. Available in English &amp; Spanish.</div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon">🌍</div>
+          <div>
+            <div class="contact-card-label">International Clients</div>
+            <div class="contact-card-value">Virtual — Worldwide</div>
+            <div class="contact-card-sub">We serve clients in all 50 U.S. states and internationally. 100% virtual, no office visit needed.</div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon">🔐</div>
+          <div>
+            <div class="contact-card-label">Existing Clients</div>
+            <div class="contact-card-value"><a href="https://www.notion.so/oppimus-client-portal" target="_blank" rel="noopener noreferrer">Access Your Portal →</a></div>
+            <div class="contact-card-sub">View your return status, documents, and message your expert directly.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Business Hours -->
+      <div class="hours-card">
+        <div class="hours-title">Business Hours</div>
+        <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time open">9:00 AM – 6:00 PM CST</span></div>
+        <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time open">10:00 AM – 3:00 PM CST</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time closed">Closed</span></div>
+        <div style="margin-top:12px;padding:10px 12px;background:rgba(196,160,92,0.08);border-radius:10px;font-size:0.76rem;color:var(--muted);line-height:1.5;">
+          💡 <strong style="color:var(--gold2);">Tax Season (Jan–Apr):</strong> Extended hours Mon–Sat 9AM–8PM CST. We never miss a deadline.
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: contact form -->
+    <div class="contact-form-card">
+      <h2 class="contact-form-title">Send Us a Message</h2>
+      <p class="contact-form-sub">Fill out the form below and a licensed expert will get back to you within 24 hours. For urgent matters, call or text us directly.</p>
+
+      <div id="contact-form">
+        <div style="position:absolute;left:-9999px;height:0;overflow:hidden;" aria-hidden="true"><input type="text" name="bot_trap" id="bot_trap" tabindex="-1" autocomplete="off"></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" id="cf-first" placeholder="Jane" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" id="cf-last" placeholder="Doe" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="cf-email" placeholder="jane@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" id="cf-phone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>What service are you interested in?</label>
+          <select id="cf-service">
+            <option value="">Select a service...</option>
+            <option>Tax Preparation & Filing</option>
+            <option>Bookkeeping (Monthly)</option>
+            <option>Payroll Services</option>
+            <option>Business Formation (LLC)</option>
+            <option>ITIN Application & Renewal</option>
+            <option>IRS Audit Representation</option>
+            <option>Credit Repair Consulting</option>
+            <option>Financial Planning & Budgeting</option>
+            <option>Notary Services</option>
+            <option>International Student Tax (F-1/J-1)</option>
+            <option>Non-Resident Tax (1040-NR)</option>
+            <option>Digital Products / Store</option>
+            <option>Not sure — need guidance</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>How did you hear about us?</label>
+          <select id="cf-source">
+            <option value="">Select...</option>
+            <option>Google Search</option>
+            <option>Social Media</option>
+            <option>Referral / Friend</option>
+            <option>University / School</option>
+            <option>International student group</option>
+            <option>YouTube</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Message *</label>
+          <textarea id="cf-message" placeholder="Tell us about your situation, questions, or what you need help with..."></textarea>
+        </div>
+        <button class="contact-submit" onclick="submitContact()">
+          Send Message →
+        </button>
+      </div>
+
+      <div class="contact-success" id="contact-success">
+        <div class="contact-success-icon">✅</div>
+        <h3>Message Received!</h3>
+        <p>Thank you for reaching out. A licensed OPPIMUS expert will respond to <strong id="success-email"></strong> within 24 hours.<br><br>For urgent matters, call us at <a href="tel:+12259524400" style="color:var(--gold2);">(225) 952-4400</a>.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BOOK A CALL -->
+<section class="calendly-section">
+  <div class="calendly-inner">
+    <div class="eyebrow" style="margin-bottom:14px;">Skip the form</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:var(--white);line-height:1.15;">Prefer to talk?<br><em style="color:var(--gold2);">Book a free 30-min call.</em></h2>
+    <p style="font-size:0.88rem;color:var(--muted);max-width:480px;margin:14px auto 0;line-height:1.7;">No commitment. No credit card. Just a real conversation with a licensed tax expert who can answer your exact questions. Available in English &amp; Spanish.</p>
+    <div class="calendly-card">
+      <div style="font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;">Free Consultation Call</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--white);margin-bottom:8px;">30 Minutes · Free · No Obligation</h3>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;max-width:500px;margin:0 auto;">We'll review your situation, answer your questions, recommend the right service, and give you a flat-fee quote — all in one call.</p>
+      <a href="https://calendly.com/oppimus-oppimus/30min" target="_blank" rel="noopener noreferrer" class="calendly-btn">
+        📅 Schedule My Free Call →
+      </a>
+      <div style="margin-top:20px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
+        <span style="font-size:0.74rem;color:var(--faint);">✓ English &amp; Spanish</span>
+        <span style="font-size:0.74rem;color:var(--faint);">✓ All visa types welcome</span>
+        <span style="font-size:0.74rem;color:var(--faint);">✓ 100% virtual</span>
+        <span style="font-size:0.74rem;color:var(--faint);">✓ No credit card needed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--deep);border-top:1px solid var(--border);padding:48px 40px 32px;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:20px;">
+      <a href="index.html" style="font-size:0.8rem;color:var(--muted);">Home</a> <a href="store.html" style="font-size:0.8rem;color:var(--muted);">Store</a> <a href="blog.html" style="font-size:0.8rem;color:var(--muted);">Blog</a> <a href="about.html" style="font-size:0.8rem;color:var(--muted);">About</a> <a href="contact.html" style="font-size:0.8rem;color:var(--gold);">Contact</a>
+    </div>
+    <p style="font-size:0.75rem;color:var(--faint);text-align:center;">© 2025 OPPIMUS Tax &amp; Financial Services LLC · All rights reserved · <a href="/cdn-cgi/l/email-protection#650a15150c081016250a15150c0810164b060a08" style="color:var(--gold);"><span class="__cf_email__" data-cfemail="96f9e6e6fffbe3e5d6f9e6e6fffbe3e5b8f5f9fb">[email&#160;protected]</span></a> · (225) 952-4400</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Contact form submission via Web3Forms
+async function submitContact() {
+  if (!window._checkHoneypot()) return;
+  if (!window._checkRateLimit()) return;
+  const first = window._sanitize(document.getElementById('cf-first').value);
+  const last  = window._sanitize(document.getElementById('cf-last').value);
+  const email = document.getElementById('cf-email').value.trim();
+  const msg   = window._sanitize(document.getElementById('cf-message').value);
+
+  if (!first || !last || !email || !msg) {
+    alert('Please fill in your name, email, and message.');
+    return;
+  }
+
+  const service = document.getElementById('cf-service').value;
+  const phone   = document.getElementById('cf-phone').value;
+  const source  = document.getElementById('cf-source').value;
+
+  const btn = document.querySelector('.contact-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'e2adcc07' + '-' + '2326-4b25' + '-' + '9eac-6e3cbb37691d',
+        subject: 'OPPIMUS Contact Form — ' + (service || 'General Inquiry'),
+        from_name: 'OPPIMUS Website',
+        message: [
+          'Name: ' + first + ' ' + last,
+          'Email: ' + email,
+          phone ? 'Phone: ' + phone : null,
+          service ? 'Service: ' + service : null,
+          source ? 'Source: ' + source : null,
+          '',
+          'Message:',
+          msg
+        ].filter(Boolean).join('\n')
+      })
+    });
+    const data = await res.json();
+    if (data.success) { window._setRateLimit();
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('contact-success').style.display = 'block';
+      document.getElementById('success-email').textContent = email;
+    } else {
+      throw new Error('Failed');
+    }
+  } catch(e) {
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+    alert('Something went wrong. Please email us directly at oppimus@oppimus.com');
+  }
+}
+
+// Neural network animation
+(function(){
+  var canvas=document.getElementById('neural-canvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d'),W,H,nodes,animId;
+  var N=48,MAXD=155;
+  function resize(){var r=canvas.parentElement.getBoundingClientRect();W=canvas.width=r.width||window.innerWidth;H=canvas.height=r.height||560;}
+  function mk(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.55,vy:(Math.random()-0.5)*0.55,r:Math.random()*2.2+1,p:Math.random()*6.28,ps:0.02+Math.random()*0.02};}
+  function init(){resize();nodes=[];for(var i=0;i<N;i++)nodes.push(mk());}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<nodes.length;i++){var n=nodes[i];n.x+=n.vx;n.y+=n.vy;n.p+=n.ps;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;n.x=Math.max(0,Math.min(W,n.x));n.y=Math.max(0,Math.min(H,n.y));}
+    for(var i=0;i<nodes.length;i++){for(var j=i+1;j<nodes.length;j++){var a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<MAXD){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(196,160,92,'+(1-d/MAXD)*0.32+')';ctx.lineWidth=0.7;ctx.stroke();}}}
+    for(var i=0;i<nodes.length;i++){var n=nodes[i],pu=Math.sin(n.p)*0.5+0.5,rad=n.r+pu*1.2,al=0.45+pu*0.45,g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,rad*3.5);g.addColorStop(0,'rgba(232,201,122,'+al*0.7+')');g.addColorStop(1,'rgba(196,160,92,0)');ctx.beginPath();ctx.arc(n.x,n.y,rad*3.5,0,6.28);ctx.fillStyle=g;ctx.fill();ctx.beginPath();ctx.arc(n.x,n.y,rad,0,6.28);ctx.fillStyle='rgba(232,201,122,'+al+')';ctx.fill(
