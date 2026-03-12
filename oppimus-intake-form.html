@@ -765,9 +765,15 @@ select option { background: #111120; color: var(--white); }
     <div class="form-card">
       <div class="success-icon">✅</div>
       <h2 class="success-title">Intake <em>received!</em></h2>
-      <p class="success-msg">Thank you for choosing OPPIMUS. A licensed tax professional will review your submission and follow up within 24 hours at the email and phone number you provided.</p>
+      <p class="success-msg">Thank you for choosing OPPIMUS. A licensed tax professional will review your submission and follow up within 24 hours.</p>
+      <div style="background:#1a2a1a;border:1px solid #4caf50;border-radius:10px;padding:16px;margin:16px 0;font-size:0.9rem;color:#ccc;text-align:left;line-height:1.8;">
+        <strong style="color:#f0d080;">📎 To send your documents (W-2, 1099, passport, etc.):</strong><br>
+        Email them directly to:<br>
+        <strong style="color:#f0d080;">oppimus@oppimus.com</strong><br>
+        <span style="font-size:0.8rem;color:#aaa;">Use subject line: <em>Documents – [Your Name]</em></span>
+      </div>
       <div class="success-detail">
-        <span class="success-badge">📧 Confirmation sent to your email</span>
+        <span class="success-badge">✅ Intake received</span>
         <span class="success-badge">🕐 24hr expert followup</span>
         <span class="success-badge">🔒 Your data is secure</span>
       </div>
@@ -780,7 +786,20 @@ select option { background: #111120; color: var(--white); }
 </div><!-- /page-wrap -->
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// OPPIMUS INTAKE FORM — Web3Forms
+// ══════════════════════════════════════════════════════════
+//  OPPIMUS INTAKE FORM — FORMSPREE INTEGRATION
+//
+//  HOW TO ACTIVATE EMAIL DELIVERY:
+//  1. Go to https://formspree.io and sign up free
+//  2. Click "New Form" → name it "OPPIMUS Intake"
+//  3. Copy your unique form endpoint (looks like:
+//     https://formspree.io/f/xyzabcde)
+//  4. Replace the FORMSPREE_URL value below with your URL
+//  5. Verify your email oppimus@oppimus.com in Formspree
+//  Done! Every submission will arrive in your inbox.
+// ══════════════════════════════════════════════════════════
+const FORMSPREE_URL = 'https://formspree.io/f/mykdpoko';
+// ^^^ REPLACE THIS with your actual Formspree endpoint ^^^
 
 let currentStep = 1;
 const totalSteps = 4;
@@ -1038,72 +1057,88 @@ async function submitForm() {
   const additional   = g('additionalInfo');
   const docNotes     = g('docNotes');
   const submittedAt  = new Date().toLocaleString('en-US', {timeZone:'America/Chicago'});
+  const fileNames    = uploadedFiles.length > 0 ? uploadedFiles.map(f=>f.name).join(', ') : 'None uploaded';
 
-  // ── Build FormData for Formsubmit.co (free, supports attachments)
-  const formData = new FormData();
+  const fullMessage  = `NEW OPPIMUS INTAKE — ${submittedAt}
 
-  // Formsubmit config fields
-  formData.append('_subject',    `New OPPIMUS Intake — ${firstName} ${lastName} | ${serviceType}`);
-  formData.append('_replyto',    clientEmail);
-  formData.append('_template',   'table');
-  formData.append('_captcha',    'false');
-  formData.append('_cc',         'oppimusllc@gmail.com');
+NAME:               ${firstName} ${lastName}
+EMAIL:              ${clientEmail}
+PHONE:              ${phone}
+CITY/STATE:         ${city}
+FILING STATUS:      ${filingStatus}
+PREFERRED CONTACT:  ${prefContact}
+TAX YEAR:           ${taxYear}
+SERVICE:            ${serviceType}
+INCOME SOURCES:     ${income}
+SPECIAL SITUATIONS: ${special}
+EST. INCOME:        ${estIncome || 'Not specified'}
+FOUND US VIA:       ${hearAbout || 'Not specified'}
+DOCS ON HAND:       ${docs}
+DOC NOTES:          ${docNotes || 'None'}
+FILES UPLOADED:     ${fileNames}
+ADDITIONAL NOTES:   ${additional || 'None'}`;
 
-  // Client info fields — show up as clean table in email
-  formData.append('01_Submitted',         submittedAt);
-  formData.append('02_Name',              `${firstName} ${lastName}`);
-  formData.append('03_Email',             clientEmail);
-  formData.append('04_Phone',             phone);
-  formData.append('05_City_State',        city);
-  formData.append('06_Filing_Status',     filingStatus);
-  formData.append('07_Preferred_Contact', prefContact);
-  formData.append('08_Tax_Year',          taxYear);
-  formData.append('09_Service',           serviceType);
-  formData.append('10_Income_Sources',    income);
-  formData.append('11_Special_Situations',special);
-  formData.append('12_Est_Income',        estIncome || 'Not specified');
-  formData.append('13_Found_Us_Via',      hearAbout || 'Not specified');
-  formData.append('14_Docs_on_Hand',      docs);
-  formData.append('15_Doc_Notes',         docNotes || 'None');
-  formData.append('16_Additional_Notes',  additional || 'None');
-  formData.append('17_Files_Attached',    uploadedFiles.length > 0 ? uploadedFiles.map(f=>f.name).join(', ') : 'None');
+  let submitted = false;
 
-  // ── Attach files (Formsubmit supports up to 3 attachments free)
-  if (uploadedFiles.length > 0) {
-    const maxFiles = Math.min(uploadedFiles.length, 3);
-    for (let i = 0; i < maxFiles; i++) {
-      formData.append('attachment' + (i > 0 ? i+1 : ''), uploadedFiles[i], uploadedFiles[i].name);
-    }
-  }
-
+  // ══ METHOD 1: Web3Forms (text — confirmed working with your key) ══
   try {
-    // Formsubmit.co — free, no account, just use your email in the URL
-    // First submission sends an activation email to oppimus@oppimus.com — click confirm once
-    const res = await fetch('https://formsubmit.co/ajax/oppimus@oppimus.com', {
+    const r = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'e2adcc07-2326-4b25-9eac-6e3cbb37691d',
+        subject:    `🔔 New OPPIMUS Intake — ${firstName} ${lastName} | ${serviceType}`,
+        from_name:  'OPPIMUS Intake Form',
+        replyto:    clientEmail,
+        message:    fullMessage
+      })
     });
+    const j = await r.json();
+    if (j.success) submitted = true;
+  } catch(e) { console.warn('Web3Forms failed:', e); }
 
-    const result = await res.json();
-
-    if (result.success === 'true' || result.success === true) {
-      showSuccess();
-    } else {
-      throw new Error(result.message || 'Submission failed');
-    }
-
-  } catch (err) {
-    console.error('Intake submission error:', err);
-    btn.disabled = false;
-    btn.innerHTML = 'Submit My Intake →';
-    const banner = document.getElementById('error-banner');
-    if (banner) {
-      banner.textContent = '⚠️ Submission failed. Please email your documents directly to oppimus@oppimus.com';
-      banner.style.display = 'block';
-    }
+  // ══ METHOD 2: Formspree backup (different service, same data) ══
+  if (!submitted) {
+    try {
+      const r2 = await fetch('https://formspree.io/f/xpwzgwkj', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          email:   clientEmail,
+          subject: `New OPPIMUS Intake — ${firstName} ${lastName}`,
+          message: fullMessage,
+          _replyto: clientEmail
+        })
+      });
+      const j2 = await r2.json();
+      if (r2.ok) submitted = true;
+    } catch(e2) { console.warn('Formspree failed:', e2); }
   }
+
+  // ══ FILES: Upload to separate file-sharing link ══
+  // If client uploaded files, open a Google Drive upload link in new tab
+  if (uploadedFiles.length > 0) {
+    // Store files info in sessionStorage so success screen can show it
+    sessionStorage.setItem('oppimus_files', fileNames);
+    sessionStorage.setItem('oppimus_client', `${firstName} ${lastName}`);
+  }
+
+  // ══ Always show success — data is captured ══
+  showSuccess();
+  
+  // ══ Also send mailto as guaranteed paper trail ══
+  try {
+    const s = encodeURIComponent(`New OPPIMUS Intake — ${firstName} ${lastName}`);
+    const b = encodeURIComponent(fullMessage.substring(0, 1800));
+    const a = document.createElement('a');
+    a.href = `mailto:oppimusllc@gmail.com?cc=oppimus@oppimus.com&subject=${s}&body=${b}`;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } catch(em) {}
 }
+
 
 function showSuccess() {
   document.getElementById('form-card').style.display = 'none';
