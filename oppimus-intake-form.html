@@ -780,20 +780,7 @@ select option { background: #111120; color: var(--white); }
 </div><!-- /page-wrap -->
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ══════════════════════════════════════════════════════════
-//  OPPIMUS INTAKE FORM — FORMSPREE INTEGRATION
-//
-//  HOW TO ACTIVATE EMAIL DELIVERY:
-//  1. Go to https://formspree.io and sign up free
-//  2. Click "New Form" → name it "OPPIMUS Intake"
-//  3. Copy your unique form endpoint (looks like:
-//     https://formspree.io/f/xyzabcde)
-//  4. Replace the FORMSPREE_URL value below with your URL
-//  5. Verify your email oppimus@oppimus.com in Formspree
-//  Done! Every submission will arrive in your inbox.
-// ══════════════════════════════════════════════════════════
-const FORMSPREE_URL = 'https://formspree.io/f/mykdpoko';
-// ^^^ REPLACE THIS with your actual Formspree endpoint ^^^
+// OPPIMUS INTAKE FORM — Web3Forms
 
 let currentStep = 1;
 const totalSteps = 4;
@@ -1020,7 +1007,6 @@ function reviewCard(title, rows) {
 
 // ── Submit via Formspree
 async function submitForm() {
-  // Validate consent
   const consent = document.getElementById('consentCheck');
   if (!consent.checked) {
     document.getElementById('consentError').style.display = 'block';
@@ -1030,69 +1016,83 @@ async function submitForm() {
 
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
-  btn.innerHTML = `<span style="animation:spin 1s linear infinite;display:inline-block">⏳</span> Submitting...`;
+  btn.innerHTML = '⏳ Submitting...';
 
-  // Collect all form data
-  const formData = new FormData();
+  const g  = id => (document.getElementById(id)?.value || '').trim();
+  const ch = sel => [...document.querySelectorAll(sel+':checked')].map(x=>x.value).join(', ') || 'None';
 
-  // Personal
-  formData.append('_subject', `New OPPIMUS Intake — ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`);
-  formData.append('First Name', document.getElementById('firstName').value);
-  formData.append('Last Name', document.getElementById('lastName').value);
-  formData.append('Email', document.getElementById('email').value);
-  formData.append('Phone', document.getElementById('phone').value);
-  formData.append('City / State', document.getElementById('city').value);
-  formData.append('Filing Status', document.querySelector('input[name="filingStatus"]:checked')?.value || '');
-  formData.append('Preferred Contact', document.getElementById('preferredContact').value || 'Not specified');
+  const firstName    = g('firstName');
+  const lastName     = g('lastName');
+  const clientEmail  = g('email');
+  const phone        = g('phone');
+  const city         = g('city');
+  const filingStatus = document.querySelector('input[name="filingStatus"]:checked')?.value || 'Not specified';
+  const prefContact  = g('preferredContact') || 'Email';
+  const taxYear      = g('taxYear');
+  const serviceType  = g('serviceType');
+  const income       = ch('input[name="income[]"]');
+  const special      = ch('input[name="special[]"]');
+  const docs         = ch('input[name="docs[]"]');
+  const estIncome    = g('estimatedIncome');
+  const hearAbout    = g('hearAbout');
+  const additional   = g('additionalInfo');
+  const docNotes     = g('docNotes');
+  const submittedAt  = new Date().toLocaleString('en-US', {timeZone:'America/Chicago'});
 
-  // Tax situation
-  formData.append('Tax Year', document.getElementById('taxYear').value);
-  formData.append('Service Requested', document.getElementById('serviceType').value);
-  const income = [...document.querySelectorAll('input[name="income[]"]:checked')].map(c=>c.value);
-  formData.append('Income Sources', income.join(', '));
-  const special = [...document.querySelectorAll('input[name="special[]"]:checked')].map(c=>c.value);
-  formData.append('Special Situations', special.join(', ') || 'None');
-  formData.append('Estimated Income', document.getElementById('estimatedIncome').value || 'Not specified');
-  formData.append('How They Found Us', document.getElementById('hearAbout').value || 'Not specified');
-  formData.append('Additional Notes', document.getElementById('additionalInfo').value || 'None');
+  const message = `=== NEW OPPIMUS CLIENT INTAKE ===
+Submitted: ${submittedAt}
 
-  // Documents
-  const docs = [...document.querySelectorAll('input[name="docs[]"]:checked')].map(c=>c.value);
-  formData.append('Documents on Hand', docs.join(', ') || 'None specified');
-  formData.append('Document Notes', document.getElementById('docNotes').value || 'None');
+--- CLIENT INFO ---
+Name:             ${firstName} ${lastName}
+Email:            ${clientEmail}
+Phone:            ${phone}
+City / State:     ${city}
+Filing Status:    ${filingStatus}
+Preferred Contact:${prefContact}
 
-  // Attach uploaded files
-  uploadedFiles.forEach(file => formData.append('Uploaded Files', file, file.name));
+--- TAX SITUATION ---
+Tax Year:         ${taxYear}
+Service:          ${serviceType}
+Income Sources:   ${income}
+Special Situations:${special}
+Est. Income:      ${estIncome}
+Found Us Via:     ${hearAbout}
 
-  // Formspree redirect config
-  formData.append('_replyto', document.getElementById('email').value);
+--- DOCUMENTS ---
+Docs on Hand:     ${docs}
+Doc Notes:        ${docNotes}
+
+--- ADDITIONAL NOTES ---
+${additional || 'None'}`;
 
   try {
-    const res = await fetch(FORMSPREE_URL, {
+    const res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key:  'e2adcc07-2326-4b25-9eac-6e3cbb37691d',
+        subject:     `New OPPIMUS Intake — ${firstName} ${lastName} | ${serviceType}`,
+        from_name:   'OPPIMUS Intake Form',
+        replyto:     clientEmail,
+        message:     message
+      })
     });
 
-    if (res.ok) {
+    const result = await res.json();
+    if (result.success) {
       showSuccess();
     } else {
-      const data = await res.json();
-      // If Formspree URL is placeholder, show instructions
-      if (FORMSPREE_URL.includes('YOUR_FORM_ID')) {
-        showSetupPrompt();
-      } else {
-        throw new Error(data?.error || 'Submission failed');
-      }
+      throw new Error(result.message || 'Submission failed');
     }
+
   } catch (err) {
-    if (FORMSPREE_URL.includes('YOUR_FORM_ID')) {
-      showSetupPrompt();
-    } else {
-      btn.disabled = false;
-      btn.innerHTML = 'Submit My Intake <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
-      document.getElementById('error-banner').textContent = '⚠️ Submission failed. Please try again or contact us directly at oppimus@oppimus.com.';
-      document.getElementById('error-banner').style.display = 'block';
+    console.error('Intake error:', err);
+    btn.disabled = false;
+    btn.innerHTML = 'Submit My Intake →';
+    const banner = document.getElementById('error-banner');
+    if (banner) {
+      banner.textContent = '⚠️ Submission failed. Please email us directly at oppimus@oppimus.com or call us.';
+      banner.style.display = 'block';
     }
   }
 }
@@ -1104,30 +1104,6 @@ function showSuccess() {
   document.getElementById('success-screen').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function showSetupPrompt() {
-  // Show as success for demo, but inform about setup
-  document.getElementById('form-card').style.display = 'none';
-  document.querySelector('.progress-wrap').style.display = 'none';
-  const ss = document.getElementById('success-screen');
-  ss.style.display = 'block';
-  ss.querySelector('.success-title').innerHTML = 'Form <em>ready to activate!</em>';
-  ss.querySelector('.success-msg').innerHTML = `
-    Your form is beautifully built and working! <br><br>
-    <strong style="color:var(--gold2)">To activate email delivery to oppimus@oppimus.com:</strong><br><br>
-    1. Go to <a href="https://formspree.io" target="_blank" style="color:var(--gold)">formspree.io</a> and sign up free<br>
-    2. Click <strong>New Form</strong> → name it "OPPIMUS Intake"<br>
-    3. Copy your form endpoint URL<br>
-    4. Open the HTML file and replace <code style="background:rgba(196,160,92,0.1);padding:2px 6px;border-radius:4px;font-size:0.85em;">YOUR_FORM_ID</code> with your actual ID<br>
-    5. Verify your email in Formspree — done! ✅
-  `;
-  ss.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  ss.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// Spin animation for loading
-const style = document.createElement('style');
-style.textContent = '@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }';
-document.head.appendChild(style);
 </script>
 </body>
 </html>
