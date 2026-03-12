@@ -3,1107 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPPIMUS — Client Intake Form</title>
+<title>OPPIMUS — Client Intake Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --void: #05050a;
-  --deep: #09090f;
-  --card: #111120;
-  --card2: #14142a;
-  --border: rgba(255,255,255,0.07);
-  --border-gold: rgba(196,160,92,0.3);
-  --border-focus: rgba(196,160,92,0.7);
-  --gold: #c4a05c;
-  --gold2: #e8c97a;
-  --gold-dim: rgba(196,160,92,0.1);
-  --white: #f8f6f1;
-  --muted: rgba(248,246,241,0.48);
-  --faint: rgba(248,246,241,0.2);
-  --error: #f87171;
-  --success: #4ade80;
+  --void: #05050a; --deep: #09090f; --card: #111120;
+  --gold: #c4a05c; --gold2: #e8c97a; --gold-dim: rgba(196,160,92,0.1);
+  --white: #f8f6f1; --muted: rgba(248,246,241,0.48);
+  --border: rgba(255,255,255,0.07); --error: #f87171; --success: #4ade80;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; }
-
 body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--void);
-  color: var(--white);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  font-family: 'Outfit', sans-serif; background: var(--void); color: var(--white);
+  -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.6;
 }
 
-/* Grain overlay */
-body::after {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 9999; opacity: 0.5;
-}
+/* Ambient Visuals */
+.glow { position: fixed; border-radius: 50%; filter: blur(120px); z-index: 0; pointer-events: none; }
+.glow-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(196,160,92,0.08) 0%, transparent 70%); top: -10%; right: -5%; }
 
-/* Ambient glow */
-.glow {
-  position: fixed; border-radius: 50%; pointer-events: none;
-  filter: blur(130px); z-index: 0;
-}
-.glow-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(196,160,92,0.07) 0%, transparent 70%); top: -150px; right: -150px; }
-.glow-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%); bottom: 20%; left: -100px; }
+/* Layout */
+.page-wrap { max-width: 800px; margin: 0 auto; padding: 60px 20px; position: relative; z-index: 2; }
+.header { text-align: center; margin-bottom: 50px; }
+.logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; letter-spacing: 4px; color: var(--white); margin-bottom: 8px; }
+.logo span { color: var(--gold); }
 
-/* ── HEADER ── */
-.form-header {
-  background: rgba(5,5,10,0.95);
-  border-bottom: 1px solid var(--border);
-  padding: 18px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  position: relative; z-index: 10;
-}
-.header-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.logo-mark {
-  width: 36px; height: 36px;
-  background: linear-gradient(135deg, var(--gold), var(--gold2));
-  border-radius: 8px; display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden; flex-shrink: 0;
-}
-.logo-mark::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%); }
-.logo-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; letter-spacing: 3px; color: var(--white); }
-.logo-sub { font-size: 0.58rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 1px; }
-.header-contact { text-align: right; }
-.header-contact a { display: block; font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color .2s; }
-.header-contact a:hover { color: var(--gold); }
+/* Progress Bar */
+.progress-container { margin-bottom: 40px; background: var(--deep); height: 6px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+.progress-bar { width: 25%; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold2)); transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-/* ── PAGE LAYOUT ── */
-.page-wrap {
-  position: relative; z-index: 2;
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 60px 24px 80px;
-}
+/* Form Card */
+.form-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); position: relative; }
+.form-step { display: none; animation: fadeIn 0.4s ease forwards; }
+.form-step.active { display: block; }
 
-/* ── INTRO ── */
-.form-intro { text-align: center; margin-bottom: 56px; }
-.form-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 14px;
-}
-.form-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
-.form-eyebrow::after  { content: ''; width: 22px; height: 1px; background: var(--gold); }
-.form-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 900; line-height: 1.1; margin-bottom: 16px;
-}
-.form-title em { font-style: italic; color: var(--gold); }
-.form-subtitle { font-size: 0.97rem; color: var(--muted); line-height: 1.72; max-width: 560px; margin: 0 auto; font-weight: 300; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ── PROGRESS BAR ── */
-.progress-wrap { margin-bottom: 48px; }
-.progress-steps {
-  display: flex; align-items: center; justify-content: center;
-  gap: 0; margin-bottom: 20px;
-}
-.step-pill {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 20px;
-  font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--muted);
-  border: 1px solid var(--border);
-  background: var(--card);
-  transition: all .3s ease;
-  position: relative;
-}
-.step-pill:first-child { border-radius: 100px 0 0 100px; }
-.step-pill:last-child  { border-radius: 0 100px 100px 0; }
-.step-pill.active { background: var(--gold-dim); border-color: var(--border-gold); color: var(--gold2); }
-.step-pill.done  { background: rgba(74,222,128,0.08); border-color: rgba(74,222,128,0.3); color: var(--success); }
-.step-num {
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--border); display: flex; align-items: center; justify-content: center;
-  font-size: 0.65rem; font-weight: 700; flex-shrink: 0; transition: all .3s;
-}
-.step-pill.active .step-num { background: var(--gold); color: var(--void); }
-.step-pill.done  .step-num { background: var(--success); color: var(--void); }
-
-/* ── FORM CARD ── */
-.form-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 48px 48px;
-  position: relative; overflow: hidden;
-}
-.form-card::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(196,160,92,0.03) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-/* ── STEP SECTIONS ── */
-.form-step { display: none; }
-.form-step.active { display: block; animation: stepIn .4s ease both; }
-@keyframes stepIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-.step-heading {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem; font-weight: 700;
-  margin-bottom: 6px; color: var(--white);
-}
-.step-heading em { font-style: italic; color: var(--gold); }
-.step-desc { font-size: 0.87rem; color: var(--muted); margin-bottom: 36px; line-height: 1.6; }
-
-/* ── FORM GRID ── */
+/* Inputs & UI */
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.form-grid.single { grid-template-columns: 1fr; }
-.form-group { display: flex; flex-direction: column; gap: 7px; }
-.form-group.full { grid-column: 1 / -1; }
+.full { grid-column: 1 / -1; }
+label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+input, select, textarea {
+  width: 100%; background: var(--deep); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 18px; color: var(--white); font-family: inherit; transition: all 0.2s; outline: none;
+}
+input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px var(--gold-dim); }
+.hidden-honeypot { display: none; }
 
-label {
-  font-size: 0.76rem; font-weight: 600;
-  letter-spacing: 1px; text-transform: uppercase;
-  color: var(--muted); transition: color .2s;
-}
-.form-group:focus-within label { color: var(--gold); }
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-select,
-textarea {
-  background: var(--deep);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 16px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.92rem;
-  color: var(--white);
-  transition: border-color .25s, box-shadow .25s, background .25s;
-  outline: none;
-  width: 100%;
-  appearance: none;
-  -webkit-appearance: none;
-}
-input::placeholder, textarea::placeholder { color: var(--faint); }
-input:focus, select:focus, textarea:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(196,160,92,0.1);
-  background: rgba(196,160,92,0.04);
-}
-input.error, select.error, textarea.error {
-  border-color: var(--error);
-  box-shadow: 0 0 0 3px rgba(248,113,113,0.1);
-}
-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
-select {
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c4a05c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 40px;
-  cursor: pointer;
-}
-select option { background: #111120; color: var(--white); }
-
-.field-hint { font-size: 0.74rem; color: var(--faint); }
-.field-error { font-size: 0.74rem; color: var(--error); display: none; }
-.form-group.has-error .field-error { display: block; }
-.form-group.has-error label { color: var(--error); }
-
-/* ── CHECKBOX / RADIO GROUPS ── */
-.check-group { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
-.check-group.row { flex-direction: row; flex-wrap: wrap; gap: 10px; }
-.check-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 16px;
-  background: var(--deep);
-  border: 1px solid var(--border);
-  border-radius: 10px; cursor: pointer;
-  transition: all .25s;
-  user-select: none;
-}
-.check-item:hover { border-color: var(--border-gold); background: var(--gold-dim); }
-.check-item input[type="checkbox"],
-.check-item input[type="radio"] {
-  width: 18px; height: 18px; flex-shrink: 0;
-  border: 1px solid var(--border); border-radius: 4px;
-  background: var(--card); cursor: pointer; padding: 0;
-  accent-color: var(--gold);
-}
-.check-item span { font-size: 0.88rem; color: var(--white); line-height: 1.3; }
-.check-item input:checked ~ span { color: var(--gold2); }
-.check-item:has(input:checked) { border-color: var(--border-gold); background: var(--gold-dim); }
-
-/* ── FILE UPLOAD ── */
+/* Upload Zone */
 .upload-zone {
-  border: 2px dashed rgba(196,160,92,0.25);
-  border-radius: 14px;
-  padding: 36px 24px;
-  text-align: center;
-  cursor: pointer;
-  transition: all .3s ease;
-  background: var(--deep);
-  position: relative;
+  border: 2px dashed var(--border); border-radius: 16px; padding: 40px 20px; text-align: center;
+  transition: all 0.3s; cursor: pointer; background: rgba(255,255,255,0.02);
 }
-.upload-zone:hover, .upload-zone.dragover {
-  border-color: var(--gold);
-  background: var(--gold-dim);
-}
-.upload-zone input[type="file"] {
-  position: absolute; inset: 0; opacity: 0;
-  cursor: pointer; width: 100%; height: 100%;
-  padding: 0; border: none; background: none; border-radius: 0;
-}
-.upload-icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
-.upload-title { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-.upload-sub { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-.upload-types { font-size: 0.72rem; color: var(--faint); margin-top: 8px; }
-.file-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
-.file-item {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  background: rgba(196,160,92,0.08); border: 1px solid var(--border-gold);
-  border-radius: 8px; padding: 10px 14px;
-}
-.file-item-name { font-size: 0.82rem; color: var(--gold2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.file-item-size { font-size: 0.72rem; color: var(--muted); flex-shrink: 0; }
-.file-remove {
-  background: none; border: none; color: var(--error);
-  cursor: pointer; font-size: 1rem; padding: 0; flex-shrink: 0;
-  line-height: 1; transition: transform .2s;
-}
-.file-remove:hover { transform: scale(1.2); }
+.upload-zone.dragover { border-color: var(--gold); background: var(--gold-dim); transform: scale(1.01); }
 
-/* ── DIVIDER ── */
-.form-divider {
-  display: flex; align-items: center; gap: 16px;
-  margin: 28px 0;
+/* Buttons */
+.btn-row { display: flex; justify-content: space-between; margin-top: 35px; gap: 15px; }
+.btn {
+  padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: 600; font-family: inherit;
+  transition: all 0.3s; border: none; display: flex; align-items: center; gap: 8px;
 }
-.form-divider::before, .form-divider::after {
-  content: ''; flex: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
-}
-.form-divider span { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: var(--void); box-shadow: 0 10px 20px rgba(196,160,92,0.2); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(196,160,92,0.3); }
+.btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
 
-/* ── NAVIGATION BUTTONS ── */
-.form-nav {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-top: 40px; gap: 16px; flex-wrap: wrap;
-}
-.btn-back {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 28px;
-  background: transparent; border: 1px solid var(--border);
-  border-radius: 10px; font-family: 'Outfit', sans-serif;
-  font-size: 0.88rem; color: var(--muted); cursor: pointer;
-  transition: all .25s ease;
-}
-.btn-back:hover { border-color: var(--gold); color: var(--gold); }
-.btn-next {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 14px 36px;
-  background: linear-gradient(135deg, var(--gold), var(--gold2));
-  border: none; border-radius: 10px;
-  font-family: 'Outfit', sans-serif; font-size: 0.92rem; font-weight: 600;
-  color: var(--void); cursor: pointer;
-  box-shadow: 0 8px 28px rgba(196,160,92,0.3);
-  transition: all .3s ease; margin-left: auto;
-}
-.btn-next:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(196,160,92,0.45); }
-.btn-next:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-.btn-submit {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 16px 44px;
-  background: linear-gradient(135deg, var(--gold), var(--gold2));
-  border: none; border-radius: 10px;
-  font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600;
-  color: var(--void); cursor: pointer;
-  box-shadow: 0 8px 32px rgba(196,160,92,0.3);
-  transition: all .3s ease; margin-left: auto;
-}
-.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(196,160,92,0.45); }
-.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-/* ── SUCCESS SCREEN ── */
-#success-screen {
-  display: none;
-  text-align: center;
-  padding: 60px 40px;
-  animation: stepIn .5s ease both;
-}
-.success-icon {
-  width: 80px; height: 80px; border-radius: 50%;
-  background: rgba(74,222,128,0.12);
-  border: 2px solid rgba(74,222,128,0.4);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.2rem; margin: 0 auto 28px;
-  animation: pop .5s .2s ease both;
-}
-@keyframes pop { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.success-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 14px; }
-.success-title em { font-style: italic; color: var(--gold); }
-.success-msg { font-size: 0.95rem; color: var(--muted); line-height: 1.72; max-width: 440px; margin: 0 auto 32px; }
-.success-detail {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
-  margin-bottom: 36px;
-}
-.success-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  border: 1px solid var(--border-gold);
-  background: var(--gold-dim);
-  padding: 8px 16px; border-radius: 100px;
-  font-size: 0.78rem; color: var(--gold2);
-}
-.success-back {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 28px; border: 1px solid var(--border);
-  border-radius: 10px; font-family: 'Outfit', sans-serif;
-  font-size: 0.88rem; color: var(--muted); cursor: pointer;
-  background: none; transition: all .25s;
-  text-decoration: none;
-}
-.success-back:hover { border-color: var(--gold); color: var(--gold); }
-
-/* ── ERROR BANNER ── */
-.form-error-banner {
-  display: none;
-  background: rgba(248,113,113,0.1);
-  border: 1px solid rgba(248,113,113,0.3);
-  border-radius: 10px; padding: 14px 18px;
-  font-size: 0.85rem; color: var(--error);
-  margin-bottom: 20px; line-height: 1.5;
-}
-
-/* ── SECURITY NOTE ── */
-.security-note {
-  display: flex; align-items: center; gap: 8px;
-  margin-top: 20px; justify-content: center;
-  font-size: 0.73rem; color: var(--faint);
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 700px) {
-  .form-header { padding: 14px 20px; }
-  .header-contact { display: none; }
-  .page-wrap { padding: 40px 16px 60px; }
-  .form-card { padding: 32px 24px; }
-  .form-grid { grid-template-columns: 1fr; }
-  .form-grid .form-group.full { grid-column: 1; }
-  .progress-steps { flex-direction: row; }
-  .step-pill { padding: 7px 12px; font-size: 0.68rem; }
-  .form-nav { flex-direction: column-reverse; }
-  .btn-next, .btn-submit, .btn-back { width: 100%; justify-content: center; margin-left: 0; }
-}
-@media (max-width: 480px) {
-  .form-card { padding: 24px 16px; }
-  .form-title { font-size: 1.7rem; }
-  .step-heading { font-size: 1.25rem; }
-  .upload-zone { padding: 28px 16px; }
-}
+/* Success */
+.success-card { text-align: center; display: none; }
+.check-icon { width: 60px; height: 60px; background: var(--success); color: var(--void); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.5rem; }
 </style>
 </head>
 <body>
 
 <div class="glow glow-1"></div>
-<div class="glow glow-2"></div>
 
-<!-- ── HEADER ── -->
-<header class="form-header">
-  <a class="header-logo" href="#">
-    <div class="logo-mark">
-      <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-        <rect x="1" y="11" width="3" height="7" fill="#05050a" rx="0.5"/>
-        <rect x="6" y="8" width="3" height="10" fill="#05050a" rx="0.5"/>
-        <rect x="11" y="5" width="3" height="13" fill="#05050a" rx="0.5"/>
-        <polyline points="0,9 8,15 20,2" fill="none" stroke="#05050a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <div>
-      <div class="logo-name">OPPIMUS</div>
-      <div class="logo-sub">Tax planning &amp; precision filing</div>
-    </div>
-  </a>
-  <div class="header-contact">
-    <a href="tel:+12259524400">📞 (225) 952-4400</a>
-    <a href="/cdn-cgi/l/email-protection#056a75756c687076456a75756c6870762b666a68">✉️ <span class="__cf_email__" data-cfemail="523d22223b3f2721123d22223b3f27217c313d3f">[email&#160;protected]</span></a>
-  </div>
-</header>
-
-<!-- ── MAIN ── -->
 <div class="page-wrap">
-
-  <!-- INTRO -->
-  <div class="form-intro">
-    <div class="form-eyebrow">Free &amp; Confidential</div>
-    <h1 class="form-title">Client <em>Intake Form</em></h1>
-    <p class="form-subtitle">Tell us about your tax situation. A licensed OPPIMUS professional will review your intake and follow up within 24 hours — no upfront payment required.</p>
+  <div class="header">
+    <div class="logo">OPPIMUS<span>.</span></div>
+    <p style="color: var(--muted); font-size: 0.9rem;">Elite Tax Strategy & Precision Filing</p>
   </div>
 
-  <!-- PROGRESS -->
-  <div class="progress-wrap">
-    <div class="progress-steps">
-      <div class="step-pill active" id="pill-1">
-        <span class="step-num">1</span> Personal Info
-      </div>
-      <div class="step-pill" id="pill-2">
-        <span class="step-num">2</span> Tax Situation
-      </div>
-      <div class="step-pill" id="pill-3">
-        <span class="step-num">3</span> Documents
-      </div>
-      <div class="step-pill" id="pill-4">
-        <span class="step-num">4</span> Review
-      </div>
-    </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
   </div>
 
-  <!-- ── FORM CARD ── -->
-  <div class="form-card" id="form-card">
+  <div class="form-card">
+    <form id="eliteIntakeForm">
+      <input type="text" name="_honeypot" class="hidden-honeypot">
 
-    <div class="form-error-banner" id="error-banner">
-      ⚠️ Please fill in all required fields before continuing.
-    </div>
+      <div class="form-step active" id="step1">
+        <h2 style="margin-bottom: 25px; font-family: 'Playfair Display';">Account <em style="color: var(--gold);">Identity</em></h2>
+        <div class="form-grid">
+          <div class="form-group"><label>First Name</label><input type="text" name="firstName" id="firstName" required></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="lastName" id="lastName" required></div>
+          <div class="form-group full"><label>Email Address</label><input type="email" name="email" id="email" required></div>
+        </div>
+        <div class="btn-row"><div style="flex:1"></div><button type="button" class="btn btn-primary" onclick="nextStep(2)">Continue</button></div>
+      </div>
 
-    <!-- ════ STEP 1: PERSONAL INFO ════ -->
-    <div class="form-step active" id="step-1">
-      <h2 class="step-heading">Let's start with <em>your basics.</em></h2>
-      <p class="step-desc">We need a little info to get started. Everything is 100% confidential.</p>
-
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="firstName">First Name <span style="color:var(--error)">*</span></label>
-          <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
-          <span class="field-error">Please enter your first name.</span>
-        </div>
-        <div class="form-group">
-          <label for="lastName">Last Name <span style="color:var(--error)">*</span></label>
-          <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
-          <span class="field-error">Please enter your last name.</span>
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address <span style="color:var(--error)">*</span></label>
-          <input type="email" id="email" name="email" placeholder="jane@email.com" required>
-          <span class="field-error">Please enter a valid email address.</span>
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number <span style="color:var(--error)">*</span></label>
-          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required>
-          <span class="field-error">Please enter your phone number.</span>
-        </div>
-        <div class="form-group">
-          <label for="city">City / State <span style="color:var(--error)">*</span></label>
-          <input type="text" id="city" name="city" placeholder="e.g. Baton Rouge, LA" required>
-          <span class="field-error">Please enter your city and state.</span>
-        </div>
-        <div class="form-group">
-          <label for="preferredContact">Preferred Contact Method</label>
-          <select id="preferredContact" name="preferredContact">
-            <option value="">Select one...</option>
-            <option value="email">Email</option>
-            <option value="phone-call">Phone Call</option>
-            <option value="text">Text Message</option>
-            <option value="any">Any</option>
-          </select>
-        </div>
-        <div class="form-group full">
-          <label>Filing Status <span style="color:var(--error)">*</span></label>
-          <div class="check-group row" id="filingStatusGroup">
-            <label class="check-item">
-              <input type="radio" name="filingStatus" value="Single"> <span>Single</span>
-            </label>
-            <label class="check-item">
-              <input type="radio" name="filingStatus" value="Married Filing Jointly"> <span>Married Filing Jointly</span>
-            </label>
-            <label class="check-item">
-              <input type="radio" name="filingStatus" value="Married Filing Separately"> <span>Married Filing Separately</span>
-            </label>
-            <label class="check-item">
-              <input type="radio" name="filingStatus" value="Head of Household"> <span>Head of Household</span>
-            </label>
-            <label class="check-item">
-              <input type="radio" name="filingStatus" value="Qualifying Widow(er)"> <span>Qualifying Widow(er)</span>
-            </label>
+      <div class="form-step" id="step2">
+        <h2 style="margin-bottom: 25px; font-family: 'Playfair Display';">Tax <em style="color: var(--gold);">Context</em></h2>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Primary Service</label>
+            <select name="service" id="service">
+              <option value="Essential">Essential — Simple Filing ($199)</option>
+              <option value="Professional">Professional — Itemized ($349)</option>
+              <option value="Premium">Premium — Business/Complex ($599+)</option>
+            </select>
           </div>
-          <span class="field-error" id="filingStatusError">Please select your filing status.</span>
+          <div class="form-group full"><label>Additional Details</label><textarea name="details" id="details" placeholder="Anything else we should know?"></textarea></div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Back</button>
+          <button type="button" class="btn btn-primary" onclick="nextStep(3)">Continue</button>
         </div>
       </div>
 
-      <div class="form-nav">
-        <button class="btn-next" onclick="goTo(2)">
-          Continue <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- ════ STEP 2: TAX SITUATION ════ -->
-    <div class="form-step" id="step-2">
-      <h2 class="step-heading">Your <em>tax situation.</em></h2>
-      <p class="step-desc">Help us understand your income sources and what you need. This helps us prepare the right return for you.</p>
-
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="taxYear">Tax Year <span style="color:var(--error)">*</span></label>
-          <select id="taxYear" name="taxYear" required>
-            <option value="">Select year...</option>
-            <option value="2024">2024 (Current)</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021 or earlier (Prior year)</option>
-          </select>
-          <span class="field-error">Please select a tax year.</span>
+      <div class="form-step" id="step3">
+        <h2 style="margin-bottom: 25px; font-family: 'Playfair Display';">Secure <em style="color: var(--gold);">Upload</em></h2>
+        <div class="upload-zone" id="dropZone">
+          <p style="font-weight: 500;">Drag & Drop Documents</p>
+          <p style="font-size: 0.8rem; color: var(--muted);">W-2, 1099, or prior returns (Max 10MB per file)</p>
+          <input type="file" id="fileInput" multiple style="display: none;">
         </div>
-        <div class="form-group">
-          <label for="serviceType">Service Needed <span style="color:var(--error)">*</span></label>
-          <select id="serviceType" name="serviceType" required>
-            <option value="">Select service...</option>
-            <option value="Essential ($199) — W-2 / Simple Return">Essential ($199) — W-2 / Simple Return</option>
-            <option value="Professional ($349) — Itemized / Multi-State">Professional ($349) — Itemized / Multi-State</option>
-            <option value="Premium ($599+) — Business / Complex">Premium ($599+) — Business / Complex</option>
-            <option value="Not sure — need guidance">Not sure — need guidance</option>
-          </select>
-          <span class="field-error">Please select a service type.</span>
-        </div>
-
-        <div class="form-group full">
-          <label>Income Sources (select all that apply) <span style="color:var(--error)">*</span></label>
-          <div class="check-group row" id="incomeGroup">
-            <label class="check-item">
-              <input type="checkbox" name="income[]" value="W-2 (Employed)"> <span>W-2 (Employed)</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="income[]" value="Self-Employed / Freelance"> <span>Self-Employed / Freelance</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="income[]" value="1099 Contractor"> <span>1099 Contractor</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="income[]" value="Gig Work (Uber, DoorDash, etc.)"> <span>Gig Work (Uber, DoorDash, etc.)</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="income[]" value="Rental Income"> <span>Rental Income</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="income[]" value="Investments / Stocks / Crypto"> <span>Investments / Stocks / Crypto</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="income[]" value="Social Security / Retirement"> <span>Social Security / Retirement</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="income[]" value="Unemployment"> <span>Unemployment</span>
-            </label>
-          </div>
-          <span class="field-error" id="incomeError">Please select at least one income source.</span>
-        </div>
-
-        <div class="form-group full">
-          <label>Special Situations (select any that apply)</label>
-          <div class="check-group row">
-            <label class="check-item">
-              <input type="checkbox" name="special[]" value="Have dependents / children"> <span>Have dependents / children</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="special[]" value="ITIN filer (no SSN)"> <span>ITIN filer (no SSN)</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="special[]" value="First time filing"> <span>First time filing</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="special[]" value="Lived or worked in multiple states"> <span>Multi-state (lived/worked)</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="special[]" value="Small business owner (LLC/S-Corp)"> <span>Small business owner (LLC/S-Corp)</span>
-            </label>
-            <label class="check-item">
-              <input type="checkbox" name="special[]" value="Prior year(s) unfiled"> <span>Prior year(s) unfiled</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="estimatedIncome">Estimated Annual Income</label>
-          <select id="estimatedIncome" name="estimatedIncome">
-            <option value="">Select range...</option>
-            <option value="Under $25,000">Under $25,000</option>
-            <option value="$25,000 – $50,000">$25,000 – $50,000</option>
-            <option value="$50,000 – $75,000">$50,000 – $75,000</option>
-            <option value="$75,000 – $100,000">$75,000 – $100,000</option>
-            <option value="$100,000 – $150,000">$100,000 – $150,000</option>
-            <option value="Over $150,000">Over $150,000</option>
-            <option value="Prefer not to say">Prefer not to say</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="hearAbout">How did you hear about us?</label>
-          <select id="hearAbout" name="hearAbout">
-            <option value="">Select...</option>
-            <option value="Google Search">Google Search</option>
-            <option value="Social Media">Social Media</option>
-            <option value="Referral / Word of mouth">Referral / Word of mouth</option>
-            <option value="Google Sites / Website">Google Sites / Website</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div class="form-group full">
-          <label for="additionalInfo">Anything else we should know?</label>
-          <textarea id="additionalInfo" name="additionalInfo" placeholder="Tell us about your specific situation, questions, or concerns..."></textarea>
+        <div id="filePreview" style="margin-top: 15px; font-size: 0.85rem; color: var(--gold);"></div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+          <button type="button" class="btn btn-primary" onclick="nextStep(4)">Review</button>
         </div>
       </div>
 
-      <div class="form-nav">
-        <button class="btn-back" onclick="goTo(1)">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 8H3M7 4l-4 4 4 4"/></svg>
-          Back
-        </button>
-        <button class="btn-next" onclick="goTo(3)">
-          Continue <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- ════ STEP 3: DOCUMENTS ════ -->
-    <div class="form-step" id="step-3">
-      <h2 class="step-heading">Upload your <em>documents.</em></h2>
-      <p class="step-desc">Upload whatever you have — W-2s, 1099s, last year's return, receipts, screenshots, or paystubs. Don't worry if you don't have everything yet; you can share more later.</p>
-
-      <div class="upload-zone" id="uploadZone">
-        <input type="file" id="fileInput" name="files" multiple
-               accept=".pdf,.jpg,.jpeg,.png,.gif,.doc,.docx,.xls,.xlsx,.csv,.txt,.heic,.webp"
-               onchange="handleFiles(this.files)">
-        <span class="upload-icon">📁</span>
-        <div class="upload-title">Drag &amp; drop files here, or click to browse</div>
-        <div class="upload-sub">W-2s · 1099s · Last year's return · Receipts · Paystubs · Screenshots</div>
-        <div class="upload-types">PDF, JPG, PNG, DOC, DOCX, XLS, CSV accepted · Max 10MB per file</div>
-      </div>
-      <div class="file-list" id="fileList"></div>
-
-      <div class="form-divider"><span>or describe what you have</span></div>
-
-      <div class="form-group">
-        <label for="docsAvailable">Documents you currently have</label>
-        <div class="check-group row">
-          <label class="check-item">
-            <input type="checkbox" name="docs[]" value="W-2 form(s)"> <span>W-2 form(s)</span>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="docs[]" value="1099 form(s)"> <span>1099 form(s)</span>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="docs[]" value="Last year's tax return"> <span>Last year's return</span>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="docs[]" value="Social Security / ITIN card"> <span>SSN / ITIN card</span>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="docs[]" value="Business expense receipts"> <span>Business receipts</span>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="docs[]" value="None yet — need guidance"> <span>None yet — need guidance</span>
-          </label>
+      <div class="form-step" id="step4">
+        <h2 style="margin-bottom: 25px; font-family: 'Playfair Display';">Final <em style="color: var(--gold);">Submission</em></h2>
+        <div id="summary" style="background: var(--deep); padding: 20px; border-radius: 12px; margin-bottom: 20px; font-size: 0.9rem;"></div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Submit Securely</button>
         </div>
       </div>
+    </form>
 
-      <div class="form-group" style="margin-top:20px;">
-        <label for="docNotes">Additional document notes</label>
-        <textarea id="docNotes" name="docNotes" placeholder="e.g. 'I have two W-2s from different employers' or 'I'll email my 1099s separately'..." style="min-height:80px;"></textarea>
-      </div>
-
-      <div class="form-nav">
-        <button class="btn-back" onclick="goTo(2)">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 8H3M7 4l-4 4 4 4"/></svg>
-          Back
-        </button>
-        <button class="btn-next" onclick="goTo(4)">
-          Continue <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- ════ STEP 4: REVIEW & SUBMIT ════ -->
-    <div class="form-step" id="step-4">
-      <h2 class="step-heading">Review &amp; <em>submit.</em></h2>
-      <p class="step-desc">Please confirm your information below before submitting. We'll be in touch within 24 hours.</p>
-
-      <!-- Summary cards -->
-      <div id="review-summary" style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;"></div>
-
-      <div class="form-group" style="margin-bottom:24px;">
-        <label>
-          <div class="check-item" style="border-radius:10px;">
-            <input type="checkbox" id="consentCheck" name="consent" value="yes">
-            <span>I confirm the information above is accurate and I consent to being contacted by OPPIMUS regarding my tax return. <span style="color:var(--faint)">Required</span></span>
-          </div>
-        </label>
-        <span class="field-error" id="consentError" style="display:none; margin-top:6px;">You must confirm before submitting.</span>
-      </div>
-
-      <div class="security-note">
-        🔒 Your information is encrypted and kept strictly confidential.
-      </div>
-
-      <div class="form-nav" style="margin-top:28px;">
-        <button class="btn-back" onclick="goTo(3)">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 8H3M7 4l-4 4 4 4"/></svg>
-          Back
-        </button>
-        <button class="btn-submit" id="submitBtn" onclick="submitForm()">
-          Submit My Intake
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </button>
-      </div>
-    </div>
-
-  </div><!-- /form-card -->
-
-  <!-- ── SUCCESS SCREEN ── -->
-  <div id="success-screen">
-    <div class="form-card">
-      <div class="success-icon">✅</div>
-      <h2 class="success-title">Intake <em>received!</em></h2>
-      <p class="success-msg">Thank you for choosing OPPIMUS. A licensed tax professional will review your submission and follow up within 24 hours at the email and phone number you provided.</p>
-      <div class="success-detail">
-        <span class="success-badge">📧 Confirmation sent to your email</span>
-        <span class="success-badge">🕐 24hr expert followup</span>
-        <span class="success-badge">🔒 Your data is secure</span>
-      </div>
-      <a href="tel:+12259524400" class="success-back">
-        📞 Questions? Call (225) 952-4400
-      </a>
+    <div class="success-card" id="successMsg">
+      <div class="check-icon">✓</div>
+      <h2 style="font-family: 'Playfair Display'; margin-bottom: 10px;">Submission Received</h2>
+      <p style="color: var(--muted);">An OPPIMUS specialist will contact you within 24 hours.</p>
     </div>
   </div>
+</div>
 
-</div><!-- /page-wrap -->
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// OPPIMUS INTAKE FORM — Web3Forms
-
+<script>
 let currentStep = 1;
-const totalSteps = 4;
-let uploadedFiles = [];
+let files = [];
 
-// ── Step navigation
-function goTo(step) {
-  if (step > currentStep && !validateStep(currentStep)) return;
-  hideBanner();
-
-  // Update pills
-  document.querySelectorAll('.step-pill').forEach((p, i) => {
-    p.classList.remove('active', 'done');
-    if (i + 1 < step)  p.classList.add('done');
-    if (i + 1 === step) p.classList.add('active');
-  });
-
-  // Update done pill inner
-  document.querySelectorAll('.step-pill.done .step-num').forEach(n => {
-    n.textContent = '✓';
-  });
-
-  document.getElementById(`step-${currentStep}`).classList.remove('active');
-  currentStep = step;
-  document.getElementById(`step-${currentStep}`).classList.add('active');
-
-  if (step === 4) buildReview();
-  document.getElementById('form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+function updateUI() {
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`step${currentStep}`).classList.add('active');
+  document.getElementById('progressBar').style.width = `${(currentStep / 4) * 100}%`;
+  if(currentStep === 4) buildSummary();
 }
 
-// ── Validation
-function validateStep(step) {
-  hideBanner();
-  let valid = true;
+function nextStep(s) { currentStep = s; updateUI(); }
+function prevStep(s) { currentStep = s; updateUI(); }
 
-  if (step === 1) {
-    const required = ['firstName','lastName','email','phone','city'];
-    required.forEach(id => {
-      const el = document.getElementById(id);
-      const group = el.closest('.form-group');
-      if (!el.value.trim()) {
-        group.classList.add('has-error');
-        el.classList.add('error');
-        valid = false;
-      } else {
-        group.classList.remove('has-error');
-        el.classList.remove('error');
-      }
-    });
-    // Email format
-    const emailEl = document.getElementById('email');
-    if (emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
-      emailEl.closest('.form-group').classList.add('has-error');
-      emailEl.classList.add('error');
-      valid = false;
-    }
-    // Filing status radio
-    const radios = document.querySelectorAll('input[name="filingStatus"]');
-    const checked = [...radios].some(r => r.checked);
-    const errEl = document.getElementById('filingStatusError');
-    if (!checked) {
-      errEl.style.display = 'block';
-      valid = false;
-    } else {
-      errEl.style.display = 'none';
-    }
-  }
-
-  if (step === 2) {
-    // Tax year
-    const taxYearEl = document.getElementById('taxYear');
-    if (!taxYearEl.value) {
-      taxYearEl.closest('.form-group').classList.add('has-error');
-      taxYearEl.classList.add('error');
-      valid = false;
-    } else {
-      taxYearEl.closest('.form-group').classList.remove('has-error');
-      taxYearEl.classList.remove('error');
-    }
-    // Service type
-    const svcEl = document.getElementById('serviceType');
-    if (!svcEl.value) {
-      svcEl.closest('.form-group').classList.add('has-error');
-      svcEl.classList.add('error');
-      valid = false;
-    } else {
-      svcEl.closest('.form-group').classList.remove('has-error');
-      svcEl.classList.remove('error');
-    }
-    // Income sources
-    const incomeChecked = document.querySelectorAll('input[name="income[]"]:checked');
-    const incomeErr = document.getElementById('incomeError');
-    if (incomeChecked.length === 0) {
-      incomeErr.style.display = 'block';
-      valid = false;
-    } else {
-      incomeErr.style.display = 'none';
-    }
-  }
-
-  if (!valid) showBanner();
-  return valid;
-}
-
-function showBanner() {
-  document.getElementById('error-banner').style.display = 'block';
-}
-function hideBanner() {
-  document.getElementById('error-banner').style.display = 'none';
-}
-
-// Clear error on input
-document.querySelectorAll('input, select, textarea').forEach(el => {
-  el.addEventListener('input', () => {
-    el.classList.remove('error');
-    el.closest('.form-group')?.classList.remove('has-error');
-    hideBanner();
-  });
-});
-
-// ── File upload handling
-function handleFiles(files) {
-  for (const file of files) {
-    if (file.size > 10 * 1024 * 1024) {
-      alert(`"${file.name}" is too large. Max file size is 10MB.`);
-      continue;
-    }
-    if (!uploadedFiles.find(f => f.name === file.name)) {
-      uploadedFiles.push(file);
-    }
-  }
-  renderFileList();
-}
-
-function renderFileList() {
-  const list = document.getElementById('fileList');
-  list.innerHTML = '';
-  uploadedFiles.forEach((file, i) => {
-    const size = file.size < 1024*1024
-      ? `${(file.size/1024).toFixed(1)} KB`
-      : `${(file.size/1024/1024).toFixed(1)} MB`;
-    const item = document.createElement('div');
-    item.className = 'file-item';
-    item.innerHTML = `
-      <span class="file-item-name">📄 ${file.name}</span>
-      <span class="file-item-size">${size}</span>
-      <button class="file-remove" onclick="removeFile(${i})" type="button" title="Remove">✕</button>
-    `;
-    list.appendChild(item);
-  });
-}
-
-function removeFile(index) {
-  uploadedFiles.splice(index, 1);
-  renderFileList();
-}
-
-// Drag & drop
-const zone = document.getElementById('uploadZone');
-zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
-zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
-zone.addEventListener('drop', e => {
+const dropZone = document.getElementById('dropZone');
+dropZone.onclick = () => document.getElementById('fileInput').click();
+dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('dragover'); };
+dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+dropZone.ondrop = (e) => {
   e.preventDefault();
-  zone.classList.remove('dragover');
+  dropZone.classList.remove('dragover');
   handleFiles(e.dataTransfer.files);
-});
+};
 
-// ── Build review summary
-function buildReview() {
-  const firstName = document.getElementById('firstName').value;
-  const lastName = document.getElementById('lastName').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const city = document.getElementById('city').value;
-  const filing = document.querySelector('input[name="filingStatus"]:checked')?.value || '—';
-  const preferred = document.getElementById('preferredContact').value || '—';
-  const taxYear = document.getElementById('taxYear').value;
-  const service = document.getElementById('serviceType').value;
-  const income = [...document.querySelectorAll('input[name="income[]"]:checked')].map(c=>c.value);
-  const special = [...document.querySelectorAll('input[name="special[]"]:checked')].map(c=>c.value);
-  const estIncome = document.getElementById('estimatedIncome').value || '—';
-  const docs = [...document.querySelectorAll('input[name="docs[]"]:checked')].map(c=>c.value);
-  const notes = document.getElementById('additionalInfo').value;
+document.getElementById('fileInput').onchange = (e) => handleFiles(e.target.files);
 
-  const summary = document.getElementById('review-summary');
-  summary.innerHTML = `
-    ${reviewCard('👤 Personal Information', [
-      ['Name', `${firstName} ${lastName}`],
-      ['Email', email],
-      ['Phone', phone],
-      ['City / State', city],
-      ['Filing Status', filing],
-      ['Preferred Contact', preferred],
-    ])}
-    ${reviewCard('📋 Tax Situation', [
-      ['Tax Year', taxYear],
-      ['Service', service],
-      ['Income Sources', income.join(', ') || '—'],
-      ['Special Situations', special.join(', ') || 'None'],
-      ['Est. Income', estIncome],
-      ['Additional Notes', notes || 'None'],
-    ])}
-    ${reviewCard('📁 Documents', [
-      ['Files Uploaded', uploadedFiles.length > 0 ? uploadedFiles.map(f=>f.name).join(', ') : 'None uploaded'],
-      ['Documents on Hand', docs.join(', ') || '—'],
-    ])}
-  `;
-}
-
-function reviewCard(title, rows) {
-  const rowsHtml = rows.map(([label, val]) => `
-    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;">
-      <span style="font-size:0.73rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);min-width:140px;flex-shrink:0;">${label}</span>
-      <span style="font-size:0.88rem;color:var(--white);flex:1;">${val}</span>
-    </div>
-  `).join('');
-  return `
-    <div style="background:var(--deep);border:1px solid var(--border);border-radius:12px;padding:20px 24px;">
-      <div style="font-size:0.85rem;font-weight:600;color:var(--gold);margin-bottom:12px;letter-spacing:0.5px;">${title}</div>
-      ${rowsHtml}
-    </div>
-  `;
-}
-
-// ── Submit via Formspree
-async function submitForm() {
-  const consent = document.getElementById('consentCheck');
-  if (!consent.checked) {
-    document.getElementById('consentError').style.display = 'block';
-    return;
+function handleFiles(newFiles) {
+  for (let f of newFiles) {
+    if (f.size > 10 * 1024 * 1024) continue;
+    files.push(f);
   }
-  document.getElementById('consentError').style.display = 'none';
+  document.getElementById('filePreview').innerText = `${files.length} file(s) attached`;
+}
 
+function buildSummary() {
+  const data = new FormData(document.getElementById('eliteIntakeForm'));
+  document.getElementById('summary').innerHTML = `
+    <p><strong>Name:</strong> ${data.get('firstName')} ${data.get('lastName')}</p>
+    <p><strong>Service:</strong> ${data.get('service')}</p>
+    <p><strong>Files:</strong> ${files.length} documents</p>
+  `;
+}
+
+document.getElementById('eliteIntakeForm').onsubmit = async (e) => {
+  e.preventDefault();
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
-  btn.innerHTML = '⏳ Submitting...';
+  btn.innerText = 'Encrypting...';
 
-  const g  = id => (document.getElementById(id)?.value || '').trim();
-  const ch = sel => [...document.querySelectorAll(sel+':checked')].map(x=>x.value).join(', ') || 'None';
+  const formData = new FormData(e.target);
+  if (formData.get('_honeypot')) return;
 
-  const firstName    = g('firstName');
-  const lastName     = g('lastName');
-  const clientEmail  = g('email');
-  const phone        = g('phone');
-  const city         = g('city');
-  const filingStatus = document.querySelector('input[name="filingStatus"]:checked')?.value || 'Not specified';
-  const prefContact  = g('preferredContact') || 'Email';
-  const taxYear      = g('taxYear');
-  const serviceType  = g('serviceType');
-  const income       = ch('input[name="income[]"]');
-  const special      = ch('input[name="special[]"]');
-  const docs         = ch('input[name="docs[]"]');
-  const estIncome    = g('estimatedIncome');
-  const hearAbout    = g('hearAbout');
-  const additional   = g('additionalInfo');
-  const docNotes     = g('docNotes');
-  const submittedAt  = new Date().toLocaleString('en-US', {timeZone:'America/Chicago'});
-
-  const message = `=== NEW OPPIMUS CLIENT INTAKE ===
-Submitted: ${submittedAt}
-
---- CLIENT INFO ---
-Name:             ${firstName} ${lastName}
-Email:            ${clientEmail}
-Phone:            ${phone}
-City / State:     ${city}
-Filing Status:    ${filingStatus}
-Preferred Contact:${prefContact}
-
---- TAX SITUATION ---
-Tax Year:         ${taxYear}
-Service:          ${serviceType}
-Income Sources:   ${income}
-Special Situations:${special}
-Est. Income:      ${estIncome}
-Found Us Via:     ${hearAbout}
-
---- DOCUMENTS ---
-Docs on Hand:     ${docs}
-Doc Notes:        ${docNotes}
-
---- ADDITIONAL NOTES ---
-${additional || 'None'}`;
+  formData.append('access_key', 'e2adcc07-2326-4b25-9eac-6e3cbb37691d');
+  formData.append('subject', `Elite Intake: ${formData.get('firstName')} ${formData.get('lastName')}`);
 
   try {
-    const res = await fetch('https://api.web3forms.com/submit', {
+    const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key:  'e2adcc07-2326-4b25-9eac-6e3cbb37691d',
-        subject:     `New OPPIMUS Intake — ${firstName} ${lastName} | ${serviceType}`,
-        from_name:   'OPPIMUS Intake Form',
-        replyto:     clientEmail,
-        message:     message
-      })
+      body: formData
     });
-
-    const result = await res.json();
-    if (result.success) {
-      showSuccess();
-    } else {
-      throw new Error(result.message || 'Submission failed');
+    if (response.ok) {
+      document.getElementById('eliteIntakeForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
     }
-
   } catch (err) {
-    console.error('Intake error:', err);
+    alert("Submission error. Please try again.");
     btn.disabled = false;
-    btn.innerHTML = 'Submit My Intake →';
-    const banner = document.getElementById('error-banner');
-    if (banner) {
-      banner.textContent = '⚠️ Submission failed. Please email us directly at oppimus@oppimus.com or call us.';
-      banner.style.display = 'block';
-    }
   }
-}
+};
 
-function showSuccess() {
-  document.getElementById('form-card').style.display = 'none';
-  document.querySelector('.progress-wrap').style.display = 'none';
-  document.getElementById('success-screen').style.display = 'block';
-  document.getElementById('success-screen').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
+window.onload = () => {
+  const inputs = ['firstName', 'lastName', 'email', 'details'];
+  inputs.forEach(id => {
+    const el = document.getElementById(id);
+    el.value = sessionStorage.getItem(id) || '';
+    el.oninput = () => sessionStorage.setItem(id, el.value);
+  });
+};
 </script>
 </body>
 </html>
