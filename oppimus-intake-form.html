@@ -769,7 +769,7 @@ select option { background: #111120; color: var(--white); }
       <div style="background:#1a2a1a;border:1px solid #4caf50;border-radius:10px;padding:16px;margin:16px 0;font-size:0.9rem;color:#ccc;text-align:left;line-height:1.8;">
         <strong style="color:#f0d080;">📎 To send your documents (W-2, 1099, passport, etc.):</strong><br>
         Email them directly to:<br>
-        <strong style="color:#f0d080;">oppimus@oppimus.com</strong><br>
+        <strong style="color:#f0d080;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd928d8d9490888ebd928d8d9490888ed39e9290">[email&#160;protected]</a></strong><br>
         <span style="font-size:0.8rem;color:#aaa;">Use subject line: <em>Documents – [Your Name]</em></span>
       </div>
       <div class="success-detail">
@@ -785,7 +785,7 @@ select option { background: #111120; color: var(--white); }
 
 </div><!-- /page-wrap -->
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ══════════════════════════════════════════════════════════
 //  OPPIMUS INTAKE FORM — FORMSPREE INTEGRATION
 //
@@ -1086,7 +1086,7 @@ ADDITIONAL NOTES:   ${additional || 'None'}`;
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        access_key: 'e2adcc07-2326-4b25-9eac-6e3cbb37691d',
+        access_key: '346ac47d-9125-4d84-8d32-e54797fe83e5',
         subject:    `🔔 New OPPIMUS Intake — ${firstName} ${lastName} | ${serviceType}`,
         from_name:  'OPPIMUS Intake Form',
         replyto:    clientEmail,
@@ -1167,10 +1167,6 @@ function showSetupPrompt() {
   ss.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Spin animation for loading
-const style = document.createElement('style');
-style.textContent = '@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }';
-document.head.appendChild(style);
-</script>
+// Spin
 </body>
 </html>
