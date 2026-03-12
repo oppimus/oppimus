@@ -1059,84 +1059,51 @@ async function submitForm() {
   const submittedAt  = new Date().toLocaleString('en-US', {timeZone:'America/Chicago'});
   const fileNames    = uploadedFiles.length > 0 ? uploadedFiles.map(f=>f.name).join(', ') : 'None uploaded';
 
-  const fullMessage  = `NEW OPPIMUS INTAKE — ${submittedAt}
-
-NAME:               ${firstName} ${lastName}
-EMAIL:              ${clientEmail}
-PHONE:              ${phone}
-CITY/STATE:         ${city}
-FILING STATUS:      ${filingStatus}
-PREFERRED CONTACT:  ${prefContact}
-TAX YEAR:           ${taxYear}
-SERVICE:            ${serviceType}
-INCOME SOURCES:     ${income}
-SPECIAL SITUATIONS: ${special}
-EST. INCOME:        ${estIncome || 'Not specified'}
-FOUND US VIA:       ${hearAbout || 'Not specified'}
-DOCS ON HAND:       ${docs}
-DOC NOTES:          ${docNotes || 'None'}
-FILES UPLOADED:     ${fileNames}
-ADDITIONAL NOTES:   ${additional || 'None'}`;
-
-  let submitted = false;
-
-  // ══ METHOD 1: Web3Forms (text — confirmed working with your key) ══
   try {
-    const r = await fetch('https://api.web3forms.com/submit', {
+    const res = await fetch('https://formspree.io/f/mvzwrqlz', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        access_key: '346ac47d-9125-4d84-8d32-e54797fe83e5',
-        subject:    `🔔 New OPPIMUS Intake — ${firstName} ${lastName} | ${serviceType}`,
-        from_name:  'OPPIMUS Intake Form',
-        replyto:    clientEmail,
-        message:    fullMessage
+        _replyto:           clientEmail,
+        _subject:           `New OPPIMUS Intake — ${firstName} ${lastName} | ${serviceType}`,
+        '01_Submitted':     submittedAt,
+        '02_Name':          `${firstName} ${lastName}`,
+        '03_Email':         clientEmail,
+        '04_Phone':         phone,
+        '05_City_State':    city,
+        '06_Filing_Status': filingStatus,
+        '07_Pref_Contact':  prefContact,
+        '08_Tax_Year':      taxYear,
+        '09_Service':       serviceType,
+        '10_Income':        income,
+        '11_Special':       special,
+        '12_Est_Income':    estIncome || 'Not specified',
+        '13_Found_Via':     hearAbout || 'Not specified',
+        '14_Docs_on_Hand':  docs,
+        '15_Doc_Notes':     docNotes || 'None',
+        '16_Files':         fileNames,
+        '17_Notes':         additional || 'None'
       })
     });
-    const j = await r.json();
-    if (j.success) submitted = true;
-  } catch(e) { console.warn('Web3Forms failed:', e); }
 
-  // ══ METHOD 2: Formspree backup (different service, same data) ══
-  if (!submitted) {
-    try {
-      const r2 = await fetch('https://formspree.io/f/xpwzgwkj', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          email:   clientEmail,
-          subject: `New OPPIMUS Intake — ${firstName} ${lastName}`,
-          message: fullMessage,
-          _replyto: clientEmail
-        })
-      });
-      const j2 = await r2.json();
-      if (r2.ok) submitted = true;
-    } catch(e2) { console.warn('Formspree failed:', e2); }
+    const result = await res.json();
+
+    if (res.ok) {
+      showSuccess();
+    } else {
+      throw new Error(result?.error || JSON.stringify(result));
+    }
+
+  } catch(err) {
+    console.error('Submission error:', err);
+    btn.disabled = false;
+    btn.innerHTML = 'Submit My Intake →';
+    const banner = document.getElementById('error-banner');
+    if (banner) {
+      banner.textContent = '⚠️ Submission failed. Please email us directly at oppimus@oppimus.com';
+      banner.style.display = 'block';
+    }
   }
-
-  // ══ FILES: Upload to separate file-sharing link ══
-  // If client uploaded files, open a Google Drive upload link in new tab
-  if (uploadedFiles.length > 0) {
-    // Store files info in sessionStorage so success screen can show it
-    sessionStorage.setItem('oppimus_files', fileNames);
-    sessionStorage.setItem('oppimus_client', `${firstName} ${lastName}`);
-  }
-
-  // ══ Always show success — data is captured ══
-  showSuccess();
-  
-  // ══ Also send mailto as guaranteed paper trail ══
-  try {
-    const s = encodeURIComponent(`New OPPIMUS Intake — ${firstName} ${lastName}`);
-    const b = encodeURIComponent(fullMessage.substring(0, 1800));
-    const a = document.createElement('a');
-    a.href = `mailto:oppimusllc@gmail.com?cc=oppimus@oppimus.com&subject=${s}&body=${b}`;
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  } catch(em) {}
 }
 
 
