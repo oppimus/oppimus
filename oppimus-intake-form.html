@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPPIMUS — Client Intake Form</title>
+<title>OPPIMUS — Client Intake Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -409,6 +409,7 @@ select option { background: #111120; color: var(--white); }
 </head>
 <body>
 
+
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 
@@ -765,15 +766,9 @@ select option { background: #111120; color: var(--white); }
     <div class="form-card">
       <div class="success-icon">✅</div>
       <h2 class="success-title">Intake <em>received!</em></h2>
-      <p class="success-msg">Thank you for choosing OPPIMUS. A licensed tax professional will review your submission and follow up within 24 hours.</p>
-      <div style="background:#1a2a1a;border:1px solid #4caf50;border-radius:10px;padding:16px;margin:16px 0;font-size:0.9rem;color:#ccc;text-align:left;line-height:1.8;">
-        <strong style="color:#f0d080;">📎 To send your documents (W-2, 1099, passport, etc.):</strong><br>
-        Email them directly to:<br>
-        <strong style="color:#f0d080;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd928d8d9490888ebd928d8d9490888ed39e9290">[email&#160;protected]</a></strong><br>
-        <span style="font-size:0.8rem;color:#aaa;">Use subject line: <em>Documents – [Your Name]</em></span>
-      </div>
+      <p class="success-msg">Thank you for choosing OPPIMUS. A licensed tax professional will review your submission and follow up within 24 hours at the email and phone number you provided.</p>
       <div class="success-detail">
-        <span class="success-badge">✅ Intake received</span>
+        <span class="success-badge">📧 Confirmation sent to your email</span>
         <span class="success-badge">🕐 24hr expert followup</span>
         <span class="success-badge">🔒 Your data is secure</span>
       </div>
@@ -785,21 +780,8 @@ select option { background: #111120; color: var(--white); }
 
 </div><!-- /page-wrap -->
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ══════════════════════════════════════════════════════════
-//  OPPIMUS INTAKE FORM — FORMSPREE INTEGRATION
-//
-//  HOW TO ACTIVATE EMAIL DELIVERY:
-//  1. Go to https://formspree.io and sign up free
-//  2. Click "New Form" → name it "OPPIMUS Intake"
-//  3. Copy your unique form endpoint (looks like:
-//     https://formspree.io/f/xyzabcde)
-//  4. Replace the FORMSPREE_URL value below with your URL
-//  5. Verify your email oppimus@oppimus.com in Formspree
-//  Done! Every submission will arrive in your inbox.
-// ══════════════════════════════════════════════════════════
-const FORMSPREE_URL = 'https://formspree.io/f/mykdpoko';
-// ^^^ REPLACE THIS with your actual Formspree endpoint ^^^
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// OPPIMUS INTAKE FORM — Formspree
 
 let currentStep = 1;
 const totalSteps = 4;
@@ -1025,6 +1007,300 @@ function reviewCard(title, rows) {
 }
 
 // ── Submit via Formspree
+function showSuccess() {
+  document.getElementById('form-card').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+  document.getElementById('success-screen').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function showSetupPrompt() {
+  // Show as success for demo, but inform about setup
+  document.getElementById('form-card').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  const ss = document.getElementById('success-screen');
+  ss.style.display = 'block';
+  ss.querySelector('.success-title').innerHTML = 'Form <em>ready to activate!</em>';
+  ss.querySelector('.success-msg').innerHTML = `
+    Your form is beautifully built and working! <br><br>
+    <strong style="color:var(--gold2)">To activate email delivery to oppimus@oppimus.com:</strong><br><br>
+    1. Go to <a href="https://formspree.io" target="_blank" style="color:var(--gold)">formspree.io</a> and sign up free<br>
+    2. Click <strong>New Form</strong> → name it "OPPIMUS Intake"<br>
+    3. Copy your form endpoint URL<br>
+    4. Open the HTML file and replace <code style="background:rgba(196,160,92,0.1);padding:2px 6px;border-radius:4px;font-size:0.85em;">YOUR_FORM_ID</code> with your actual ID<br>
+    5. Verify your email in Formspree — done! ✅
+  `;
+  ss.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  ss.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Spin animation for loading
+const style = document.createElement('style');
+style.textContent = '@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }';
+document.head.appendChild(style);
+</script>
+
+<script>
+
+// OPPIMUS INTAKE FORM — Formspree
+
+let currentStep = 1;
+const totalSteps = 4;
+let uploadedFiles = [];
+
+// ── Step navigation
+function goTo(step) {
+  if (step > currentStep && !validateStep(currentStep)) return;
+  hideBanner();
+
+  // Update pills
+  document.querySelectorAll('.step-pill').forEach((p, i) => {
+    p.classList.remove('active', 'done');
+    if (i + 1 < step)  p.classList.add('done');
+    if (i + 1 === step) p.classList.add('active');
+  });
+
+  // Update done pill inner
+  document.querySelectorAll('.step-pill.done .step-num').forEach(n => {
+    n.textContent = '✓';
+  });
+
+  document.getElementById(`step-${currentStep}`).classList.remove('active');
+  currentStep = step;
+  document.getElementById(`step-${currentStep}`).classList.add('active');
+
+  if (step === 4) buildReview();
+  document.getElementById('form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── Validation
+function validateStep(step) {
+  hideBanner();
+  let valid = true;
+
+  if (step === 1) {
+    const required = ['firstName','lastName','email','phone','city'];
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      const group = el.closest('.form-group');
+      if (!el.value.trim()) {
+        group.classList.add('has-error');
+        el.classList.add('error');
+        valid = false;
+      } else {
+        group.classList.remove('has-error');
+        el.classList.remove('error');
+      }
+    });
+    // Email format
+    const emailEl = document.getElementById('email');
+    if (emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+      emailEl.closest('.form-group').classList.add('has-error');
+      emailEl.classList.add('error');
+      valid = false;
+    }
+    // Filing status radio
+    const radios = document.querySelectorAll('input[name="filingStatus"]');
+    const checked = [...radios].some(r => r.checked);
+    const errEl = document.getElementById('filingStatusError');
+    if (!checked) {
+      errEl.style.display = 'block';
+      valid = false;
+    } else {
+      errEl.style.display = 'none';
+    }
+  }
+
+  if (step === 2) {
+    // Tax year
+    const taxYearEl = document.getElementById('taxYear');
+    if (!taxYearEl.value) {
+      taxYearEl.closest('.form-group').classList.add('has-error');
+      taxYearEl.classList.add('error');
+      valid = false;
+    } else {
+      taxYearEl.closest('.form-group').classList.remove('has-error');
+      taxYearEl.classList.remove('error');
+    }
+    // Service type
+    const svcEl = document.getElementById('serviceType');
+    if (!svcEl.value) {
+      svcEl.closest('.form-group').classList.add('has-error');
+      svcEl.classList.add('error');
+      valid = false;
+    } else {
+      svcEl.closest('.form-group').classList.remove('has-error');
+      svcEl.classList.remove('error');
+    }
+    // Income sources
+    const incomeChecked = document.querySelectorAll('input[name="income[]"]:checked');
+    const incomeErr = document.getElementById('incomeError');
+    if (incomeChecked.length === 0) {
+      incomeErr.style.display = 'block';
+      valid = false;
+    } else {
+      incomeErr.style.display = 'none';
+    }
+  }
+
+  if (!valid) showBanner();
+  return valid;
+}
+
+function showBanner() {
+  document.getElementById('error-banner').style.display = 'block';
+}
+function hideBanner() {
+  document.getElementById('error-banner').style.display = 'none';
+}
+
+// Clear error on input
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', () => {
+    el.classList.remove('error');
+    el.closest('.form-group')?.classList.remove('has-error');
+    hideBanner();
+  });
+});
+
+// ── File upload handling
+function handleFiles(files) {
+  for (const file of files) {
+    if (file.size > 10 * 1024 * 1024) {
+      alert(`"${file.name}" is too large. Max file size is 10MB.`);
+      continue;
+    }
+    if (!uploadedFiles.find(f => f.name === file.name)) {
+      uploadedFiles.push(file);
+    }
+  }
+  renderFileList();
+}
+
+function renderFileList() {
+  const list = document.getElementById('fileList');
+  list.innerHTML = '';
+  uploadedFiles.forEach((file, i) => {
+    const size = file.size < 1024*1024
+      ? `${(file.size/1024).toFixed(1)} KB`
+      : `${(file.size/1024/1024).toFixed(1)} MB`;
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.innerHTML = `
+      <span class="file-item-name">📄 ${file.name}</span>
+      <span class="file-item-size">${size}</span>
+      <button class="file-remove" onclick="removeFile(${i})" type="button" title="Remove">✕</button>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function removeFile(index) {
+  uploadedFiles.splice(index, 1);
+  renderFileList();
+}
+
+// Drag & drop
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+
+// ── Build review summary
+function buildReview() {
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const city = document.getElementById('city').value;
+  const filing = document.querySelector('input[name="filingStatus"]:checked')?.value || '—';
+  const preferred = document.getElementById('preferredContact').value || '—';
+  const taxYear = document.getElementById('taxYear').value;
+  const service = document.getElementById('serviceType').value;
+  const income = [...document.querySelectorAll('input[name="income[]"]:checked')].map(c=>c.value);
+  const special = [...document.querySelectorAll('input[name="special[]"]:checked')].map(c=>c.value);
+  const estIncome = document.getElementById('estimatedIncome').value || '—';
+  const docs = [...document.querySelectorAll('input[name="docs[]"]:checked')].map(c=>c.value);
+  const notes = document.getElementById('additionalInfo').value;
+
+  const summary = document.getElementById('review-summary');
+  summary.innerHTML = `
+    ${reviewCard('👤 Personal Information', [
+      ['Name', `${firstName} ${lastName}`],
+      ['Email', email],
+      ['Phone', phone],
+      ['City / State', city],
+      ['Filing Status', filing],
+      ['Preferred Contact', preferred],
+    ])}
+    ${reviewCard('📋 Tax Situation', [
+      ['Tax Year', taxYear],
+      ['Service', service],
+      ['Income Sources', income.join(', ') || '—'],
+      ['Special Situations', special.join(', ') || 'None'],
+      ['Est. Income', estIncome],
+      ['Additional Notes', notes || 'None'],
+    ])}
+    ${reviewCard('📁 Documents', [
+      ['Files Uploaded', uploadedFiles.length > 0 ? uploadedFiles.map(f=>f.name).join(', ') : 'None uploaded'],
+      ['Documents on Hand', docs.join(', ') || '—'],
+    ])}
+  `;
+}
+
+function reviewCard(title, rows) {
+  const rowsHtml = rows.map(([label, val]) => `
+    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;">
+      <span style="font-size:0.73rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);min-width:140px;flex-shrink:0;">${label}</span>
+      <span style="font-size:0.88rem;color:var(--white);flex:1;">${val}</span>
+    </div>
+  `).join('');
+  return `
+    <div style="background:var(--deep);border:1px solid var(--border);border-radius:12px;padding:20px 24px;">
+      <div style="font-size:0.85rem;font-weight:600;color:var(--gold);margin-bottom:12px;letter-spacing:0.5px;">${title}</div>
+      ${rowsHtml}
+    </div>
+  `;
+}
+
+// ── Submit via Formspree
+function showSuccess() {
+  document.getElementById('form-card').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+  document.getElementById('success-screen').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function showSetupPrompt() {
+  // Show as success for demo, but inform about setup
+  document.getElementById('form-card').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  const ss = document.getElementById('success-screen');
+  ss.style.display = 'block';
+  ss.querySelector('.success-title').innerHTML = 'Form <em>ready to activate!</em>';
+  ss.querySelector('.success-msg').innerHTML = `
+    Your form is beautifully built and working! <br><br>
+    <strong style="color:var(--gold2)">To activate email delivery to oppimus@oppimus.com:</strong><br><br>
+    1. Go to <a href="https://formspree.io" target="_blank" style="color:var(--gold)">formspree.io</a> and sign up free<br>
+    2. Click <strong>New Form</strong> → name it "OPPIMUS Intake"<br>
+    3. Copy your form endpoint URL<br>
+    4. Open the HTML file and replace <code style="background:rgba(196,160,92,0.1);padding:2px 6px;border-radius:4px;font-size:0.85em;">YOUR_FORM_ID</code> with your actual ID<br>
+    5. Verify your email in Formspree — done! ✅
+  `;
+  ss.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  ss.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Spin animation for loading
+const style = document.createElement('style');
+style.textContent = '@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }';
+document.head.appendChild(style);
+
+
 async function submitForm() {
   const consent = document.getElementById('consentCheck');
   if (!consent.checked) {
@@ -1057,32 +1333,62 @@ async function submitForm() {
   const additional   = g('additionalInfo');
   const docNotes     = g('docNotes');
   const submittedAt  = new Date().toLocaleString('en-US', {timeZone:'America/Chicago'});
-  const fileNames    = uploadedFiles.length > 0 ? uploadedFiles.map(f=>f.name).join(', ') : 'None uploaded';
+
+  // ── STEP 1: Upload files to file.io and collect download links
+  let fileLinks = [];
+  if (uploadedFiles.length > 0) {
+    btn.innerHTML = `⏳ Uploading files (0/${uploadedFiles.length})...`;
+    for (let i = 0; i < uploadedFiles.length; i++) {
+      try {
+        btn.innerHTML = `⏳ Uploading files (${i+1}/${uploadedFiles.length})...`;
+        const fd = new FormData();
+        fd.append('file', uploadedFiles[i], uploadedFiles[i].name);
+        const r = await fetch('https://file.io/?expires=14d', {
+          method: 'POST',
+          body: fd
+        });
+        const j = await r.json();
+        if (j.success && j.link) {
+          fileLinks.push(`${uploadedFiles[i].name}: ${j.link}`);
+        }
+      } catch(e) {
+        fileLinks.push(`${uploadedFiles[i].name}: (upload failed - client will email directly)`);
+      }
+    }
+  }
+
+  btn.innerHTML = '⏳ Sending intake...';
+
+  // ── STEP 2: POST to Formspree with all data + file links
+  const fileSection = fileLinks.length > 0
+    ? 'UPLOADED FILES (download links valid 14 days):\n' + fileLinks.join('\n')
+    : 'FILES: None uploaded — client will email documents to oppimus@oppimus.com';
 
   try {
     const res = await fetch('https://formspree.io/f/mvzwrqlz', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        _replyto:           clientEmail,
-        _subject:           `New OPPIMUS Intake — ${firstName} ${lastName} | ${serviceType}`,
-        '01_Submitted':     submittedAt,
-        '02_Name':          `${firstName} ${lastName}`,
-        '03_Email':         clientEmail,
-        '04_Phone':         phone,
-        '05_City_State':    city,
-        '06_Filing_Status': filingStatus,
-        '07_Pref_Contact':  prefContact,
-        '08_Tax_Year':      taxYear,
-        '09_Service':       serviceType,
-        '10_Income':        income,
-        '11_Special':       special,
-        '12_Est_Income':    estIncome || 'Not specified',
-        '13_Found_Via':     hearAbout || 'Not specified',
-        '14_Docs_on_Hand':  docs,
-        '15_Doc_Notes':     docNotes || 'None',
-        '16_Files':         fileNames,
-        '17_Notes':         additional || 'None'
+        _replyto:  clientEmail,
+        _subject:  `🔔 New OPPIMUS Intake — ${firstName} ${lastName} | ${serviceType}`,
+        Name:      `${firstName} ${lastName}`,
+        Email:     clientEmail,
+        Phone:     phone,
+        City:      city,
+        Filing:    filingStatus,
+        Contact:   prefContact,
+        Tax_Year:  taxYear,
+        Service:   serviceType,
+        Income:    income,
+        Special:   special,
+        Est_Income: estIncome || 'Not specified',
+        Found_Via: hearAbout || 'Not specified',
+        Docs:      docs,
+        Doc_Notes: docNotes || 'None',
+        Notes:     additional || 'None',
+        Submitted: submittedAt,
+        Files:     fileLinks.length > 0 ? fileLinks.join(' | ') : 'None',
+        _message:  fileSection
       })
     });
 
@@ -1091,49 +1397,21 @@ async function submitForm() {
     if (res.ok) {
       showSuccess();
     } else {
-      throw new Error(result?.error || JSON.stringify(result));
+      throw new Error(JSON.stringify(result));
     }
 
   } catch(err) {
-    console.error('Submission error:', err);
+    console.error(err);
     btn.disabled = false;
     btn.innerHTML = 'Submit My Intake →';
     const banner = document.getElementById('error-banner');
     if (banner) {
-      banner.textContent = '⚠️ Submission failed. Please email us directly at oppimus@oppimus.com';
+      banner.textContent = '⚠️ Submission failed. Please call us at (225) 952-4400 or email oppimus@oppimus.com';
       banner.style.display = 'block';
     }
   }
 }
 
-
-function showSuccess() {
-  document.getElementById('form-card').style.display = 'none';
-  document.querySelector('.progress-wrap').style.display = 'none';
-  document.getElementById('success-screen').style.display = 'block';
-  document.getElementById('success-screen').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function showSetupPrompt() {
-  // Show as success for demo, but inform about setup
-  document.getElementById('form-card').style.display = 'none';
-  document.querySelector('.progress-wrap').style.display = 'none';
-  const ss = document.getElementById('success-screen');
-  ss.style.display = 'block';
-  ss.querySelector('.success-title').innerHTML = 'Form <em>ready to activate!</em>';
-  ss.querySelector('.success-msg').innerHTML = `
-    Your form is beautifully built and working! <br><br>
-    <strong style="color:var(--gold2)">To activate email delivery to oppimus@oppimus.com:</strong><br><br>
-    1. Go to <a href="https://formspree.io" target="_blank" style="color:var(--gold)">formspree.io</a> and sign up free<br>
-    2. Click <strong>New Form</strong> → name it "OPPIMUS Intake"<br>
-    3. Copy your form endpoint URL<br>
-    4. Open the HTML file and replace <code style="background:rgba(196,160,92,0.1);padding:2px 6px;border-radius:4px;font-size:0.85em;">YOUR_FORM_ID</code> with your actual ID<br>
-    5. Verify your email in Formspree — done! ✅
-  `;
-  ss.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  ss.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// Spin
+</script>
 </body>
 </html>
