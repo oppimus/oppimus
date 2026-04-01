@@ -1031,20 +1031,45 @@ async function submitForm() {
   btn.disabled = true;
   btn.innerHTML = '<span style="animation:spin 1s linear infinite;display:inline-block">⏳</span> Submitting...';
 
-  // Step 1: Upload files to file.io and get shareable links
+  // Step 1: Upload files and get shareable links
   let fileLinks = [];
   if (uploadedFiles.length > 0) {
     btn.innerHTML = '<span style="animation:spin 1s linear infinite;display:inline-block">⏳</span> Uploading files...';
     for (let i = 0; i < uploadedFiles.length; i++) {
-      try {
-        const fd = new FormData();
-        fd.append('file', uploadedFiles[i], uploadedFiles[i].name);
-        const r = await fetch('https://file.io/?expires=30d', { method: 'POST', body: fd });
-        const j = await r.json();
-        if (j.success) fileLinks.push(uploadedFiles[i].name + ' → ' + j.link);
-        else fileLinks.push(uploadedFiles[i].name + ' (upload failed)');
-      } catch(e) {
-        fileLinks.push(uploadedFiles[i].name + ' (upload failed)');
+      const file = uploadedFiles[i];
+      let uploaded = false;
+
+      // Try file.io (up to 3 attempts)
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          const fd = new FormData();
+          fd.append('file', file, file.name);
+          const r = await fetch('https://file.io/?expires=30d', { method: 'POST', body: fd });
+          const j = await r.json();
+          if (j.success && j.link) {
+            fileLinks.push(file.name + ' → ' + j.link);
+            uploaded = true;
+            break;
+          }
+        } catch(e) { /* retry */ }
+      }
+
+      // Fallback: tmpfiles.org
+      if (!uploaded) {
+        try {
+          const fd2 = new FormData();
+          fd2.append('file', file, file.name);
+          const r2 = await fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd2 });
+          const j2 = await r2.json();
+          if (j2.status === 'success' && j2.data?.url) {
+            fileLinks.push(file.name + ' → ' + j2.data.url);
+            uploaded = true;
+          }
+        } catch(e2) { /* both failed */ }
+      }
+
+      if (!uploaded) {
+        fileLinks.push(file.name + ' — client will email directly to oppimus@oppimus.com');
       }
     }
   }
